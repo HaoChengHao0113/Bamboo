@@ -20,7 +20,7 @@ const Tab=createBottomTabNavigator({
           			);
           		}
           	}
-        }
+        },
         Mine:{
           screen:Mine,
           navigationOptions:{
@@ -31,6 +31,17 @@ const Tab=createBottomTabNavigator({
                 );
               }
           }
-        }
+        },
+        Dynamic:{
+          screen:Dynamic,
+          navigationOptions:{
+            tabBarLabel:'动态',
+              tabBarIcon:function(e){
+                return (
+                  <Image style={{width:26,height:26}} source={e.focused?Imgs.cart[1]:Imgs.cart[0]}/>
+                );
+              }
+          }
+        },
 });
 AppRegistry.registerComponent(appName, () => App);
