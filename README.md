@@ -5,3 +5,5 @@
 1.需要安装模块
 	//路由导航器</br>
     npm install react-navigation@2.10.0 --save</br>
+	//滑动选项卡</br>
+	npm install react-native-scrollable-tab-view --save</br>
