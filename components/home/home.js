@@ -52,6 +52,36 @@ export default class Home extends Component{
 					{this.getBanner(BannerData)}
 				</Swiper>
 			</View>
+
+			{/*每日推荐歌曲*/}
+			<View style={styles.dailyMusic}>
+				<View style={{width:W*70/375,height:'100%',alignItems:'center'}}>
+					<View style={{width:W*56/375,height:W*56/375,borderRadius:W*28/375,backgroundColor:'#d84236',justifyContent:'center',alignItems:'center'}}>
+						<Image style={{width:W*35/375,height:W*35/375}} source={require('../../image/home/FM.png')}></Image>
+					</View>
+					<Text style={{fontSize:W*15/375,color:'black',marginTop:W*5/375}}>私人FM</Text>
+				</View>
+				<View style={{width:W*70/375,height:'100%',alignItems:'center'}}>
+					<View style={{width:W*56/375,height:W*56/375,borderRadius:W*28/375,backgroundColor:'#d84236',justifyContent:'center',alignItems:'center'}}>
+						<Image style={{width:W*25/375,height:W*25/375}} source={require('../../image/home/rili.png')}></Image>
+					</View>
+					<Text style={{fontSize:W*15/375,color:'black',marginTop:W*5/375}}>每日推荐</Text>
+				</View>
+				<View style={{width:W*70/375,height:'100%',alignItems:'center'}}>
+					<View style={{width:W*56/375,height:W*56/375,borderRadius:W*28/375,backgroundColor:'#d84236',justifyContent:'center',alignItems:'center'}}>
+						<Image style={{width:W*25/375,height:W*25/375}} source={require('../../image/home/gedan.png')}></Image>
+					</View>
+					<Text style={{fontSize:W*15/375,color:'black',marginTop:W*5/375}}>歌单</Text>
+				</View>
+				<View style={{width:W*70/375,height:'100%',alignItems:'center'}}>
+					<View style={{width:W*56/375,height:W*56/375,borderRadius:W*28/375,backgroundColor:'#d84236',justifyContent:'center',alignItems:'center'}}>
+						<Image style={{width:W*25/375,height:W*25/375}} source={require('../../image/home/paihangbang.png')}></Image>
+					</View>
+					<Text style={{fontSize:W*15/375,color:'black',marginTop:W*5/375}}>排行榜</Text>
+				</View>
+			</View>
+
+			<View style={{width:"100%",height:0.5,backgroundColor:'#e6e6e6',marginTop:W*10/375}}></View>
 		</View>
 		)
 	}
@@ -88,5 +118,12 @@ const styles=StyleSheet.create({
 		top:0,
 		marginTop:H*0.17,
 		borderRadius:W*4/375,
+	},
+	dailyMusic:{
+		width:'100%',
+		height:W*80/375,
+		marginTop:W*40/375,
+		flexDirection:"row",
+		justifyContent:'space-around'
 	}
 })
