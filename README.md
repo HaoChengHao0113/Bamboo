@@ -7,3 +7,5 @@
     npm install react-navigation@2.10.0 --save</br>
 	//滑动选项卡</br>
 	npm install react-native-scrollable-tab-view --save</br>
+	//轮播插件</br>
+    npm install react-native-swiper --save</br>

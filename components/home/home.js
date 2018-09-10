@@ -1,10 +1,23 @@
 import React,{Component} from 'react';
 import {View,Text,Image,StatusBar,StyleSheet,Dimensions,Platform,TextInput} from 'react-native';
-import ScrollableTabView, {DefaultTabBar,ScrollableTabBar} from 'react-native-scrollable-tab-view'; 
+// import ScrollableTabView, {DefaultTabBar,ScrollableTabBar} from 'react-native-scrollable-tab-view'; 
+import Swiper from 'react-native-swiper';
 let W=Dimensions.get('window').width;
 let H=Dimensions.get('window').height;
+let BannerData=[require('../../image/home/Banner1.jpg')]
 
 export default class Home extends Component{
+	//轮播图
+	getBanner(data){
+		return data.map((item,index)=>{
+			
+			return (
+				<View>
+					<Image style={{width:"100%",height:W/7*2}} source={item} resizeMode="stretch"/>
+				</View>
+			)
+		});
+	}
 	render(){
 		return (
 		<View style={{flex:1,backgroundColor:'#fff'}}>
@@ -32,7 +45,13 @@ export default class Home extends Component{
 			</View>
 			</View>
 			{/*轮播图*/}
-			<View style={styles.swiper}></View>
+			<View style={styles.swiper}>
+				<Swiper style={{width:'100%',height:'100%'}}
+				        autoplay={true}
+                        horizontal={true}>
+					{this.getBanner(BannerData)}
+				</Swiper>
+			</View>
 		</View>
 		)
 	}
@@ -65,7 +84,6 @@ const styles=StyleSheet.create({
 		width:"96%",
 		marginLeft:'2%',
 		height:W/7*2,
-		backgroundColor:'blue',
 		position:'absolute',
 		top:0,
 		marginTop:H*0.17,
