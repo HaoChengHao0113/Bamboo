@@ -4,13 +4,12 @@ import {View,Text,Image,StatusBar,StyleSheet,Dimensions,Platform,TextInput} from
 import Swiper from 'react-native-swiper';
 let W=Dimensions.get('window').width;
 let H=Dimensions.get('window').height;
-let BannerData=[require('../../image/home/Banner1.jpg')]
-
+let BannerData=[require('../../image/home/Banner1.jpg'),require('../../image/home/Banner2.jpg')]
+let Songlist=[title:'aaa',data:[{name:'bbb',img:require('')}]];
 export default class Home extends Component{
 	//轮播图
 	getBanner(data){
 		return data.map((item,index)=>{
-			
 			return (
 				<View>
 					<Image style={{width:"100%",height:W/7*2}} source={item} resizeMode="stretch"/>
@@ -82,6 +81,8 @@ export default class Home extends Component{
 			</View>
 
 			<View style={{width:"100%",height:0.5,backgroundColor:'#e6e6e6',marginTop:W*10/375}}></View>
+		
+			{/*循环列表*/}
 		</View>
 		)
 	}
