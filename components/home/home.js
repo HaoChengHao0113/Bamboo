@@ -4,8 +4,9 @@ import {View,Text,Image,StatusBar,StyleSheet,Dimensions,Platform,TextInput} from
 import Swiper from 'react-native-swiper';
 let W=Dimensions.get('window').width;
 let H=Dimensions.get('window').height;
-let BannerData=[require('../../image/home/Banner1.jpg'),require('../../image/home/Banner2.jpg')]
-let Songlist=[title:'aaa',data:[{name:'bbb',img:require('')}]];
+let BannerData=[require('../../image/home/Banner1.jpg'),require('../../image/home/Banner2.jpg'),require('../../image/home/Banner3.jpg')
+			   ,require('../../image/home/Banner4.jpg'),require('../../image/home/Banner5.jpg')]
+let Songlist={title:'aaa',data:[{name:'bbb',img:require('../../image/home/Banner2.jpg')}]};
 export default class Home extends Component{
 	//轮播图
 	getBanner(data){
