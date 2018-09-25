@@ -1,12 +1,34 @@
+/**
+ * @name home.js
+ * @auhor 程浩
+ * @date 2018.9.25
+ * @desc app的home界面
+ */
 import React,{Component} from 'react';
-import {View,Text,Image,StatusBar,StyleSheet,Dimensions,Platform,TextInput} from 'react-native';
+import {View,Text,Image,StatusBar,StyleSheet,Dimensions,Platform,TextInput,SectionList} from 'react-native';
 // import ScrollableTabView, {DefaultTabBar,ScrollableTabBar} from 'react-native-scrollable-tab-view'; 
 import Swiper from 'react-native-swiper';
 let W=Dimensions.get('window').width;
 let H=Dimensions.get('window').height;
 let BannerData=[require('../../image/home/Banner1.jpg'),require('../../image/home/Banner2.jpg'),require('../../image/home/Banner3.jpg')
 			   ,require('../../image/home/Banner4.jpg'),require('../../image/home/Banner5.jpg')]
-let Songlist={title:'aaa',data:[{name:'bbb',img:require('../../image/home/Banner2.jpg')}]};
+let Songlist=[{title:'aaa',data:[{name:'aaa',img:require('../../image/home/Banner2.jpg')},
+			 {name:'aaa1',img:require('../../image/home/Banner2.jpg')},
+			 {name:'aaa2',img:require('../../image/home/Banner2.jpg')},
+			 {name:'aaa3',img:require('../../image/home/Banner2.jpg')},
+			 {name:'aaa4',img:require('../../image/home/Banner2.jpg')}]},
+			 {title:'bbb',data:[{name:'bbb',img:require('../../image/home/Banner2.jpg')},
+			 {name:'bbb1',img:require('../../image/home/Banner2.jpg')},
+			 {name:'bbb2',img:require('../../image/home/Banner2.jpg')},
+			 {name:'bbb3',img:require('../../image/home/Banner2.jpg')},
+			 {name:'bbb4',img:require('../../image/home/Banner.jpg')}]},
+			 {title:'ccc',data:[{name:'ccc',img:require('../../image/home/Banner2.jpg')},
+			 {name:'ccc1',img:require('../../image/home/Banner2.jpg')},
+			 {name:'ccc2',img:require('../../image/home/Banner2.jpg')},
+			 {name:'ccc3',img:require('../../image/home/Banner2.jpg')},
+			 {name:'ccc4',img:require('../../image/home/Banner2.jpg')},
+			 {name:'ccc5',img:require('../../image/home/Banner2.jpg')},
+			 {name:'ccc6',img:require('../../image/home/Banner2.jpg')}]}];
 export default class Home extends Component{
 	//轮播图
 	getBanner(data){
@@ -84,8 +106,24 @@ export default class Home extends Component{
 			<View style={{width:"100%",height:0.5,backgroundColor:'#e6e6e6',marginTop:W*10/375}}></View>
 		
 			{/*循环列表*/}
+			<SectionList
+				section={Songlist}
+				renderSectionHeader={this.sectionHeader}
+          		renderItem={this.renderItem}
+                keyExtractor={this.keyExtractor}
+                showsVerticalScrollIndicator = {false}
+			/>
 		</View>
 		)
+	}
+
+	keyExtractor=(item,index)=>item+index;//生成的唯一的key
+
+	sectionHeader=()=>{
+		//列表标题
+	}
+	renderItem=()=>{
+		//列表内容
 	}
 }
 
