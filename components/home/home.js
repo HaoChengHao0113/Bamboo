@@ -30,6 +30,14 @@ let Songlist=[{title:'aaa',data:[{name:'aaa',img:require('../../image/home/Banne
 			 {name:'ccc5',img:require('../../image/home/Banner2.jpg')},
 			 {name:'ccc6',img:require('../../image/home/Banner2.jpg')}]}];
 export default class Home extends Component{
+
+	constructor(props){
+		super(props);
+		this.state={
+			//状态
+		};
+	}
+
 	//轮播图
 	getBanner(data){
 		return data.map((item,index)=>{
@@ -119,11 +127,17 @@ export default class Home extends Component{
 
 	keyExtractor=(item,index)=>item+index;//生成的唯一的key
 
-	sectionHeader=()=>{
+	sectionHeader=(info)=>{
+		console.log(info);
 		//列表标题
+		return (
+		)
 	}
-	renderItem=()=>{
+	renderItem=(info)=>{
+		// console.log(info);
 		//列表内容
+		return (
+		)
 	}
 }
 
