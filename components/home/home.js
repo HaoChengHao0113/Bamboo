@@ -5,24 +5,24 @@
  * @desc app的home界面
  */
 import React,{Component} from 'react';
-import {View,Text,Image,StatusBar,StyleSheet,Dimensions,Platform,TextInput,SectionList} from 'react-native';
+import {View,Text,Image,StatusBar,StyleSheet,Dimensions,Platform,TextInput,SectionList,FlatList} from 'react-native';
 // import ScrollableTabView, {DefaultTabBar,ScrollableTabBar} from 'react-native-scrollable-tab-view'; 
 import Swiper from 'react-native-swiper';
 let W=Dimensions.get('window').width;
 let H=Dimensions.get('window').height;
 let BannerData=[require('../../image/home/Banner1.jpg'),require('../../image/home/Banner2.jpg'),require('../../image/home/Banner3.jpg')
 			   ,require('../../image/home/Banner4.jpg'),require('../../image/home/Banner5.jpg')]
-let Songlist=[{title:'aaa',data:[{name:'aaa',img:require('../../image/home/Banner2.jpg')},
+let Songlist=[{key:'推荐歌单',data:[{name:'aaa',img:require('../../image/home/Banner2.jpg')},
 			 {name:'aaa1',img:require('../../image/home/Banner2.jpg')},
 			 {name:'aaa2',img:require('../../image/home/Banner2.jpg')},
 			 {name:'aaa3',img:require('../../image/home/Banner2.jpg')},
 			 {name:'aaa4',img:require('../../image/home/Banner2.jpg')}]},
-			 {title:'bbb',data:[{name:'bbb',img:require('../../image/home/Banner2.jpg')},
+			 {key:'最新音乐',data:[{name:'bbb',img:require('../../image/home/Banner2.jpg')},
 			 {name:'bbb1',img:require('../../image/home/Banner2.jpg')},
 			 {name:'bbb2',img:require('../../image/home/Banner2.jpg')},
 			 {name:'bbb3',img:require('../../image/home/Banner2.jpg')},
-			 {name:'bbb4',img:require('../../image/home/Banner.jpg')}]},
-			 {title:'ccc',data:[{name:'ccc',img:require('../../image/home/Banner2.jpg')},
+			 {name:'bbb4',img:require('../../image/home/Banner2.jpg')}]},
+			 {key:'主播电台',data:[{name:'ccc',img:require('../../image/home/Banner2.jpg')},
 			 {name:'ccc1',img:require('../../image/home/Banner2.jpg')},
 			 {name:'ccc2',img:require('../../image/home/Banner2.jpg')},
 			 {name:'ccc3',img:require('../../image/home/Banner2.jpg')},
@@ -48,6 +48,7 @@ export default class Home extends Component{
 			)
 		});
 	}
+	//渲染界面
 	render(){
 		return (
 		<View style={{flex:1,backgroundColor:'#fff'}}>
@@ -66,11 +67,11 @@ export default class Home extends Component{
 			<View style={styles.tab}>
 				<View style={{justifyContent:'space-between',marginLeft:W/4,alignItems:'center'}}>
 					<Text style={{fontSize:W*15/375,color:'#fff'}}>个性推荐</Text>
-					<View style={{width:'50%',height:W*3/375,backgroundColor:'#fff',borderRadius:W*1.5/375}}></View>
+					<View style={{width:'50%',height:W*3/375,backgroundColor:'#fff',borderRadius:W*1.5/375,marginTop:W*10/375}}></View>
 				</View>
 				<View style={{justifyContent:'space-between',marginLeft:W/5,alignItems:'center'}}>
 					<Text style={{fontSize:W*15/375,color:'#fff'}}>主播电台</Text>
-					<View style={{width:'50%',height:W*3/375,backgroundColor:'#fff',borderRadius:W*1.5/375}}></View>
+					<View style={{width:'50%',height:W*3/375,backgroundColor:'#fff',borderRadius:W*1.5/375,marginTop:W*10/375}}></View>
 				</View>
 			</View>
 			</View>
@@ -115,7 +116,7 @@ export default class Home extends Component{
 		
 			{/*循环列表*/}
 			<SectionList
-				section={Songlist}
+				sections={Songlist}
 				renderSectionHeader={this.sectionHeader}
           		renderItem={this.renderItem}
                 keyExtractor={this.keyExtractor}
@@ -128,15 +129,20 @@ export default class Home extends Component{
 	keyExtractor=(item,index)=>item+index;//生成的唯一的key
 
 	sectionHeader=(info)=>{
-		console.log(info);
 		//列表标题
 		return (
+			<View style={{width:'100%',height:W*30/375,marginTop:W*15/375,justifyContent:'center'}}>
+				<Text style={{fontSize:W*15/375,color:'black',marginLeft:W*10/375}}>{info.section.key}</Text>
+			</View>
 		)
 	}
 	renderItem=(info)=>{
-		// console.log(info);
+		console.log(info);
 		//列表内容
 		return (
+			<View>
+
+			</View>
 		)
 	}
 }
