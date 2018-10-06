@@ -127,7 +127,8 @@ export default class Home extends Component{
 	}
 
 	keyExtractor=(item,index)=>item+index;//生成的唯一的key
-
+	_keyExtractor=(item,index)=>index.toString();
+	
 	sectionHeader=(info)=>{
 		//列表标题
 		return (
@@ -140,9 +141,19 @@ export default class Home extends Component{
 		console.log(info);
 		//列表内容
 		return (
+			info.index==info.section.data.length-1?(<View>
 			<View>
-
+				<FlatList
+					data={Songlist}
+					keyExtractor={this._keyExtractor}
+					numColumns={3}
+					renderItem={()=>{
+						return (
+							<View style={{width:(W-W*40/375)/3,height:W*60/375,marginLeft:W*10/375,backgroundColor:'red'}}></View>
+						)
+					}}/>
 			</View>
+			</View>):(<View></View>)
 		)
 	}
 }
