@@ -5,30 +5,33 @@
  * @desc app的home界面
  */
 import React,{Component} from 'react';
-import {View,Text,Image,StatusBar,StyleSheet,Dimensions,Platform,TextInput,SectionList,FlatList} from 'react-native';
+import {View,Text,Image,StatusBar,StyleSheet,Dimensions,Platform,TextInput,SectionList,FlatList,ScrollView} from 'react-native';
+
+//滑动选项卡
 // import ScrollableTabView, {DefaultTabBar,ScrollableTabBar} from 'react-native-scrollable-tab-view'; 
+
 import Swiper from 'react-native-swiper';
 let W=Dimensions.get('window').width;
 let H=Dimensions.get('window').height;
 let BannerData=[require('../../image/home/Banner1.jpg'),require('../../image/home/Banner2.jpg'),require('../../image/home/Banner3.jpg')
 			   ,require('../../image/home/Banner4.jpg'),require('../../image/home/Banner5.jpg')]
-let Songlist=[{key:'推荐歌单',data:[{name:'aaa',img:require('../../image/home/Banner2.jpg')},
-			 {name:'aaa1',img:require('../../image/home/Banner2.jpg')},
-			 {name:'aaa2',img:require('../../image/home/Banner2.jpg')},
-			 {name:'aaa3',img:require('../../image/home/Banner2.jpg')},
-			 {name:'aaa4',img:require('../../image/home/Banner2.jpg')}]},
-			 {key:'最新音乐',data:[{name:'bbb',img:require('../../image/home/Banner2.jpg')},
-			 {name:'bbb1',img:require('../../image/home/Banner2.jpg')},
-			 {name:'bbb2',img:require('../../image/home/Banner2.jpg')},
-			 {name:'bbb3',img:require('../../image/home/Banner2.jpg')},
-			 {name:'bbb4',img:require('../../image/home/Banner2.jpg')}]},
-			 {key:'主播电台',data:[{name:'ccc',img:require('../../image/home/Banner2.jpg')},
-			 {name:'ccc1',img:require('../../image/home/Banner2.jpg')},
-			 {name:'ccc2',img:require('../../image/home/Banner2.jpg')},
-			 {name:'ccc3',img:require('../../image/home/Banner2.jpg')},
-			 {name:'ccc4',img:require('../../image/home/Banner2.jpg')},
-			 {name:'ccc5',img:require('../../image/home/Banner2.jpg')},
-			 {name:'ccc6',img:require('../../image/home/Banner2.jpg')}]}];
+let Songlist=[{key:'推荐歌单',data:[{name:'aaa',img:require('../../image/home/pic4.jpg')},
+			 {name:'aaa1',img:require('../../image/home/pic5.jpg')},
+			 {name:'aaa2',img:require('../../image/home/pic6.jpg')},
+			 {name:'aaa3',img:require('../../image/home/pic7.jpg')},
+			 {name:'aaa4',img:require('../../image/home/pic8.jpg')}]},
+			 {key:'最新音乐',data:[{name:'bbb',img:require('../../image/home/pic1.jpg')},
+			 {name:'bbb1',img:require('../../image/home/pic2.jpeg')},
+			 {name:'bbb2',img:require('../../image/home/pic3.jpeg')},
+			 {name:'bbb3',img:require('../../image/home/pic8.jpg')},
+			 {name:'bbb4',img:require('../../image/home/pic6.jpg')}]},
+			 {key:'主播电台',data:[{name:'ccc',img:require('../../image/home/pic8.jpg')},
+			 {name:'ccc1',img:require('../../image/home/pic6.jpg')},
+			 {name:'ccc2',img:require('../../image/home/pic7.jpg')},
+			 {name:'ccc3',img:require('../../image/home/pic4.jpg')},
+			 {name:'ccc4',img:require('../../image/home/pic5.jpg')},
+			 {name:'ccc5',img:require('../../image/home/pic3.jpeg')},
+			 {name:'ccc6',img:require('../../image/home/pic1.jpg')}]}];
 export default class Home extends Component{
 
 	constructor(props){
@@ -75,6 +78,7 @@ export default class Home extends Component{
 				</View>
 			</View>
 			</View>
+
 			{/*轮播图*/}
 			<View style={styles.swiper}>
 				<Swiper style={{width:'100%',height:'100%'}}
@@ -85,6 +89,7 @@ export default class Home extends Component{
 			</View>
 
 			{/*每日推荐歌曲*/}
+			<ScrollView showsVerticalScrollIndicator = {false}>
 			<View style={styles.dailyMusic}>
 				<View style={{width:W*70/375,height:'100%',alignItems:'center'}}>
 					<View style={{width:W*56/375,height:W*56/375,borderRadius:W*28/375,backgroundColor:'#d84236',justifyContent:'center',alignItems:'center'}}>
@@ -122,6 +127,7 @@ export default class Home extends Component{
                 keyExtractor={this.keyExtractor}
                 showsVerticalScrollIndicator = {false}
 			/>
+			</ScrollView>
 		</View>
 		)
 	}
@@ -138,18 +144,23 @@ export default class Home extends Component{
 		)
 	}
 	renderItem=(info)=>{
-		console.log(info);
 		//列表内容
 		return (
 			info.index==info.section.data.length-1?(<View>
 			<View>
 				<FlatList
-					data={Songlist}
+					data={info.section.data}
 					keyExtractor={this._keyExtractor}
 					numColumns={3}
-					renderItem={()=>{
+					renderItem={(info)=>{
+						console.log("--------------info-----------------",info);
 						return (
-							<View style={{width:(W-W*40/375)/3,height:W*60/375,marginLeft:W*10/375,backgroundColor:'red'}}></View>
+							<View style={{width:(W-W*40/375)/3,height:W*100/375,marginLeft:W*10/375,marginTop:W*10/375}}>
+								<Image style={{width:'100%',height:W*80/375}} source={info.item.img} resizeMode="cover"></Image>
+								<View style={{width:'100%',height:W*20/375}}>
+									<Text>{info.item.name}</Text>
+								</View>
+							</View>
 						)
 					}}/>
 			</View>
