@@ -153,7 +153,7 @@ export default class Home extends Component{
 					keyExtractor={this._keyExtractor}
 					numColumns={3}
 					renderItem={(info)=>{
-						console.log("--------------info-----------------",info);
+					
 						return (
 							<View style={{width:(W-W*40/375)/3,height:W*100/375,marginLeft:W*10/375,marginTop:W*10/375}}>
 								<Image style={{width:'100%',height:W*80/375}} source={info.item.img} resizeMode="cover"></Image>
