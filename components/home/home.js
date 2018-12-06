@@ -9,7 +9,7 @@ import {View,Text,Image,StatusBar,StyleSheet,Dimensions,Platform,TextInput,Secti
 
 //滑动选项卡
 // import ScrollableTabView, {DefaultTabBar,ScrollableTabBar} from 'react-native-scrollable-tab-view'; 
-
+import BaseComponent from '../../Tool/BaseComponent';
 import Swiper from 'react-native-swiper';
 let W=Dimensions.get('window').width;
 let H=Dimensions.get('window').height;
@@ -32,7 +32,7 @@ let Songlist=[{key:'推荐歌单',data:[{name:'aaa',img:require('../../image/hom
 			 {name:'ccc4',img:require('../../image/home/pic5.jpg')},
 			 {name:'ccc5',img:require('../../image/home/pic3.jpeg')},
 			 {name:'ccc6',img:require('../../image/home/pic1.jpg')}]}];
-export default class Home extends Component{
+export default class Home extends BaseComponent{
 
 	constructor(props){
 		super(props);

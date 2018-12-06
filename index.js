@@ -7,6 +7,7 @@ import Mine from './components/mine/mine';
 import Home from './components/home/home';
 import Dynamic from './components/dynamic/dynamic';
 import Account from './components/account/account';
+import Guide from './components/common/Guide';
 import {createBottomTabNavigator,createStackNavigator} from 'react-navigation';
 console.disableYellowBox = true;
 const Tab=createBottomTabNavigator(
@@ -82,4 +83,20 @@ const Tab=createBottomTabNavigator(
       backBehavior: 'none',
   }
 );
-AppRegistry.registerComponent(appName, () => Tab);
+
+let navConfig={
+  Tab:{
+    screen: Tab,
+    navigationOptions:{
+        header:null
+    }
+  },
+  Guide:{
+    screen:Guide,
+    navigationOptions:{
+      header:null
+    }
+  },
+}
+export const navigator = createStackNavigator(navConfig);
+AppRegistry.registerComponent(appName, () => navigator);
