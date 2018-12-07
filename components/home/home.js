@@ -39,8 +39,14 @@ export default class Home extends BaseComponent{
 		this.state={
 			//状态
 		};
+		console.log("------------------------------constructor---------------------------");
 	}
-
+	ComponmentWillMount(){
+		console.log("-------------------------ComponmentWillMount------------------------");
+	}
+	ComponmentDidMount(){
+		console.log("-----------------------ComponmentDidMount----------------------------");
+	}
 	//轮播图
 	getBanner(data){
 		return data.map((item,index)=>{
@@ -53,6 +59,7 @@ export default class Home extends BaseComponent{
 	}
 	//渲染界面
 	render(){
+		console.log("----------------------render-------------");
 		return (
 		<View style={{flex:1,backgroundColor:'#fff'}}>
 			<View style={{width:W,height:W/2,backgroundColor:'#d84236'}}>

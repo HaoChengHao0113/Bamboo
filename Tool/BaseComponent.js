@@ -7,11 +7,11 @@
 import React, {Component} from "react";
 import {Alert,Image,Platform,DeviceEventEmitter,Dimensions,findNodeHandle,UIManager,BackAndroid,BackHandler,Text,View} from "react-native";
 import {NativeModules} from "react-native";
-import DeviceInfo from 'react-native-device-info';
+// import DeviceInfo from 'react-native-device-info';
 // 状态栏管理
 const StatusBarManager = NativeModules.StatusBarManager;
 import config from "../config";
-import Tools from "../lib/Tools";
+import Tools from "./Tool";
 // iPhoneX  
 const X_WIDTH = 375;  
 const X_HEIGHT = 812; 
@@ -21,7 +21,7 @@ export default class BaseComponent extends Component{
 	// 系统类型
 	static OS = Platform.OS;
 	// app当前版本
-	static V = DeviceInfo.getVersion();
+	// static V = DeviceInfo.getVersion();
 	// appStore中的appid
 	static APP_ID = "1441942550";
 	// 屏幕尺寸

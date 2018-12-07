@@ -17,9 +17,9 @@ import Toast from 'react-native-toast-native';
 // 文件上传组件
 import Uploader from "react-native-fetch-blob";
 // 下载组件
-import Downloader from 'react-native-background-downloader';
+// import Downloader from 'react-native-background-downloader';
 // 文件系统组件
-import RNFS from 'react-native-fs';
+// import RNFS from 'react-native-fs';
 
 
 export default class Tools{
@@ -703,48 +703,48 @@ export default class Tools{
 	 * @return
 	 * @desc 下载方法
 	 */
-	download(config,callback){
+	// download(config,callback){
 
-		let thiz = this;
+	// 	let thiz = this;
 
-		if(Downloader&&config&&config.fileUrl){
+	// 	if(Downloader&&config&&config.fileUrl){
 
-			// 创建下载目录
-			let downPath = `${RNFS.ExternalDirectoryPath}/xyjdowns`;
-			thiz.log("--------downPath--------",downPath);
-			RNFS.mkdir(downPath);
+	// 		// 创建下载目录
+	// 		let downPath = `${RNFS.ExternalDirectoryPath}/xyjdowns`;
+	// 		thiz.log("--------downPath--------",downPath);
+	// 		RNFS.mkdir(downPath);
 
-			let fileName = config.fileName?config.fileName:('file'+(new Date()).getTime()/1000);
-			let destination = `${downPath}/${fileName}`;
-			thiz.log("--------destination--------",destination);
-			let task = Downloader.download({
-				id: 'file'+(new Date()).getTime()/1000,
-				url: config.fileUrl,
-				destination: destination
-			}).begin((expectedBytes) => {
-				console.log(`Going to download ${expectedBytes} bytes!`);
-				callback({
-					type:0,
-					task:task
-				});
-			}).progress((percent) => {
-				console.log(`Downloaded: ${percent * 100}%`);
-				callback({
-					type:1,
-					progress:percent,
-				},null);
-			}).done(() => {
-				console.log('Download is done!');
-				callback({
-					type:2,
-					savePath:destination,
-				},null);
-			}).error((error) => {
-				console.log('Download canceled due to error: ', error);
-				callback(null,error);
-			});
-		}
+	// 		let fileName = config.fileName?config.fileName:('file'+(new Date()).getTime()/1000);
+	// 		let destination = `${downPath}/${fileName}`;
+	// 		thiz.log("--------destination--------",destination);
+	// 		let task = Downloader.download({
+	// 			id: 'file'+(new Date()).getTime()/1000,
+	// 			url: config.fileUrl,
+	// 			destination: destination
+	// 		}).begin((expectedBytes) => {
+	// 			console.log(`Going to download ${expectedBytes} bytes!`);
+	// 			callback({
+	// 				type:0,
+	// 				task:task
+	// 			});
+	// 		}).progress((percent) => {
+	// 			console.log(`Downloaded: ${percent * 100}%`);
+	// 			callback({
+	// 				type:1,
+	// 				progress:percent,
+	// 			},null);
+	// 		}).done(() => {
+	// 			console.log('Download is done!');
+	// 			callback({
+	// 				type:2,
+	// 				savePath:destination,
+	// 			},null);
+	// 		}).error((error) => {
+	// 			console.log('Download canceled due to error: ', error);
+	// 			callback(null,error);
+	// 		});
+	// 	}
 
-	}
+	// }
 
 }
