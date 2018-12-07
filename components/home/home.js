@@ -62,38 +62,42 @@ export default class Home extends BaseComponent{
 		console.log("----------------------render-------------");
 		return (
 		<View style={{flex:1,backgroundColor:'#fff'}}>
-			<View style={{width:W,height:W/2,backgroundColor:'#d84236'}}>
+			<View style={{width:W,backgroundColor:'#d84236'}}>
 				<StatusBar translucent={true} backgroundColor={'transparent'} barStyle={'dark-content'}/>
-			{/*顶部导航栏*/}
-			<View style={styles.narbar}>
-				{/*搜索框*/}
-				<View style={styles.searchBox}>
-					<Text>请输入查找歌曲</Text>
+				{/*顶部导航栏*/}
+				<View style={styles.narbar}>
+					{/*搜索框*/}
+					<View style={styles.searchBox}>
+						<Text>请输入查找歌曲</Text>
+					</View>
+					{/*搜索框*/}
+					<Image style={{width:H*0.044,height:H*0.044,marginTop:H*0.013,marginLeft:W*0.05}} source={require('../../image/home/erji.png')}></Image>
 				</View>
-				{/*搜索框*/}
-				<Image style={{width:H*0.044,height:H*0.044,marginTop:H*0.013,marginLeft:W*0.05}} source={require('../../image/home/erji.png')}></Image>
-			</View>
-			{/*Tab滑动选项*/}
-			<View style={styles.tab}>
-				<View style={{justifyContent:'space-between',marginLeft:W/4,alignItems:'center'}}>
-					<Text style={{fontSize:W*15/375,color:'#fff'}}>个性推荐</Text>
-					<View style={{width:'50%',height:W*3/375,backgroundColor:'#fff',borderRadius:W*1.5/375,marginTop:W*10/375}}></View>
+				{/*Tab滑动选项*/}
+				<View style={styles.tab}>
+					<View style={{justifyContent:'space-between',marginLeft:W/4,alignItems:'center'}}>
+						<Text style={{fontSize:W*15/375,color:'#fff'}}>个性推荐</Text>
+						<View style={{width:'50%',height:W*3/375,backgroundColor:'#fff',borderRadius:W*1.5/375,marginTop:W*10/375}}></View>
+					</View>
+					<View style={{justifyContent:'space-between',marginLeft:W/5,alignItems:'center'}}>
+						<Text style={{fontSize:W*15/375,color:'#fff'}}>主播电台</Text>
+						<View style={{width:'50%',height:W*3/375,backgroundColor:'#fff',borderRadius:W*1.5/375,marginTop:W*10/375}}></View>
+					</View>
 				</View>
-				<View style={{justifyContent:'space-between',marginLeft:W/5,alignItems:'center'}}>
-					<Text style={{fontSize:W*15/375,color:'#fff'}}>主播电台</Text>
-					<View style={{width:'50%',height:W*3/375,backgroundColor:'#fff',borderRadius:W*1.5/375,marginTop:W*10/375}}></View>
-				</View>
-			</View>
+
 			</View>
 
 			{/*轮播图*/}
-			<View style={styles.swiper}>
-				<Swiper style={{width:'100%',height:'100%'}}
-				        autoplay={true}
-                        horizontal={true}>
-					{this.getBanner(BannerData)}
-				</Swiper>
-			</View>
+			<ScrollView>
+			<View style={{width:W,backgroundColor:'#d84236',paddingBottom:10}}>
+				<View style={styles.swiper}>
+					<Swiper style={{width:'100%',height:'100%'}}
+					        autoplay={true}
+	                        horizontal={true}>
+						{this.getBanner(BannerData)}
+					</Swiper>
+				</View>
+			</View>	
 
 			{/*每日推荐歌曲*/}
 			<ScrollView showsVerticalScrollIndicator = {false}>
@@ -134,6 +138,7 @@ export default class Home extends BaseComponent{
                 keyExtractor={this.keyExtractor}
                 showsVerticalScrollIndicator = {false}
 			/>
+			</ScrollView>
 			</ScrollView>
 		</View>
 		)
@@ -198,20 +203,21 @@ const styles=StyleSheet.create({
 		height:W*30/375,
 		flexDirection:'row',
 		alignItems:'center',
+		paddingBottom:5
 	},
 	swiper:{
 		width:"96%",
 		marginLeft:'2%',
 		height:W/7*2,
-		position:'absolute',
-		top:0,
-		marginTop:H*0.17,
+		// position:'absolute',
+		// top:0,
+		marginTop:10,
 		borderRadius:W*4/375,
 	},
 	dailyMusic:{
 		width:'100%',
 		height:W*80/375,
-		marginTop:W*40/375,
+		marginTop:W*20/375,
 		flexDirection:"row",
 		justifyContent:'space-around'
 	}
