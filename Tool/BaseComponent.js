@@ -85,6 +85,13 @@ export default class BaseComponent extends Component{
 		return this;
 	}
 
+
+	/**
+	 * @method jump
+	 * @params 
+	 * @return
+	 * @desc 跳转系统自带的浏览器
+	 */
 	jump(){
 		var thiz = this;
 		ToastExample.jumpToBrower();
