@@ -7,6 +7,7 @@
 import React, {Component} from "react";
 import {Alert,Image,Platform,DeviceEventEmitter,Dimensions,findNodeHandle,UIManager,BackAndroid,BackHandler,Text,View} from "react-native";
 import {NativeModules} from "react-native";
+const ToastExample =  NativeModules.ToastExample;
 // import DeviceInfo from 'react-native-device-info';
 // 状态栏管理
 const StatusBarManager = NativeModules.StatusBarManager;
@@ -152,6 +153,22 @@ export default class BaseComponent extends Component{
 		return this;
 
 	}
+
+	/**
+	 * @method toastAndroid
+	 * @params msg->提示内容；duration->提示持续时间
+	 * @return
+	 * @desc android公用弹窗提示，依赖
+	 */
+	toastAndroid(msg,duration){
+		let thiz = this;
+		if(duration){
+			ToastExample.show(msg,duration);
+		}else{
+			ToastExample.show(msg,ToastExample.SHORT);
+		}
+
+	} 
 
 	/**
 	 * @method getViewInfo

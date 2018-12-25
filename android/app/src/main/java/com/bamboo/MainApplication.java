@@ -7,7 +7,7 @@ import com.toast.RCTToastPackage;
 import com.RNFetchBlob.RNFetchBlobPackage;
 
 
-
+import com.bamboo.CustomToastPackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
@@ -15,6 +15,7 @@ import com.facebook.soloader.SoLoader;
 
 import java.util.Arrays;
 import java.util.List;
+import android.util.Log;
 
 public class MainApplication extends Application implements ReactApplication {
 
@@ -30,7 +31,8 @@ public class MainApplication extends Application implements ReactApplication {
           new MainReactPackage(),
             
             new RNFetchBlobPackage(),
-            new RCTToastPackage() 
+            new RCTToastPackage(),
+            new CustomToastPackage() 
       );
     }
 
@@ -48,6 +50,7 @@ public class MainApplication extends Application implements ReactApplication {
   @Override
   public void onCreate() {
     super.onCreate();
+    Log.d("----------------------onCreate---------------------------","success");
     SoLoader.init(this, /* native exopackage */ false);
   }
 }
