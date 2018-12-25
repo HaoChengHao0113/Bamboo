@@ -607,6 +607,23 @@ export default class BaseComponent extends Component{
 	}
 
 	/**
+	 * @method requestInstallPermissions
+	 * @params callback->回调函数
+	 * @return
+	 * @desc 动态请求安装未知应用的权限
+	 */
+	requestInstallPermissions(callback){
+		var thiz = this;
+		if(callback){
+			ToastExample.requestInstallPermissions();
+			callback();
+		}else{
+			ToastExample.requestInstallPermissions();
+		}
+		
+	} 
+
+	/**
 	 * @method upload
 	 * @params fileUrl->要上传文件的地址；config->请求配置，实例如下：
 	 	{

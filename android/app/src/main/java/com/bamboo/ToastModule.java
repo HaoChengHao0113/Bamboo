@@ -10,6 +10,10 @@ import com.facebook.react.bridge.ReactMethod;
 import java.util.Map;
 import java.util.HashMap;
 
+import android.os.Build;
+import android.util.Log;
+import com.facebook.react.bridge.Callback;
+
 public class ToastModule extends ReactContextBaseJavaModule {
 
   private static final String DURATION_SHORT_KEY = "SHORT";
@@ -35,5 +39,26 @@ public class ToastModule extends ReactContextBaseJavaModule {
   @ReactMethod
   public void show(String message, int duration) {
     Toast.makeText(getReactApplicationContext(), message, duration).show();
+  }
+
+  @ReactMethod
+  public void requestInstallPermissions(Callback successCallback,Callback errorCallback) {
+     try{
+        if (Build.VERSION.SDK_INT >= 26) {
+          // boolean b = getPackageManager().canRequestPackageInstalls(); 
+          boolean b= true;
+          if (b){
+            String a="success";
+            successCallback.invoke(a);
+            Log.d("---------------------直接去安装------------------------------","success");
+          }else{ 
+            Log.d("-----------------去打开安装权限开关--------------------------","faild");
+          }
+        }else{
+          Log.d("---------------------直接去安装啊------------------------------","success");
+        }
+     }catch(Exception e){
+        errorCallback.invoke(e.getMessage());
+     }
   }
 }
