@@ -48,8 +48,8 @@ public class ToastModule extends ReactContextBaseJavaModule {
   public void requestInstallPermissions(Callback successCallback,Callback errorCallback) {
      try{
         if (Build.VERSION.SDK_INT >= 26) {
-          // boolean b = getPackageManager().canRequestPackageInstalls(); 
-          boolean b= true;
+          boolean b = getReactApplicationContext().getPackageManager().canRequestPackageInstalls(); 
+          // boolean b= true;
           if (b){
             String a="success";
             successCallback.invoke(a);
@@ -58,6 +58,8 @@ public class ToastModule extends ReactContextBaseJavaModule {
             Log.d("-----------------去打开安装权限开关--------------------------","faild");
           }
         }else{
+          String a="faild";
+          successCallback.invoke(a);
           Log.d("---------------------直接去安装啊------------------------------","success");
         }
      }catch(Exception e){

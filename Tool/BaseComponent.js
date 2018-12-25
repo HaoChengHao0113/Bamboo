@@ -627,10 +627,10 @@ export default class BaseComponent extends Component{
 	requestInstallPermissions(callback){
 		var thiz = this;
 		if(callback){
-			ToastExample.requestInstallPermissions();
+			ToastExample.requestInstallPermissions((msg)=>{console.log(msg)},(err)=>{console.log(err)});
 			callback();
 		}else{
-			ToastExample.requestInstallPermissions();
+			ToastExample.requestInstallPermissions((msg)=>{console.log(msg)},(err)=>{console.log(err)});
 		}
 		
 	} 
