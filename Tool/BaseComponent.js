@@ -620,17 +620,17 @@ export default class BaseComponent extends Component{
 
 	/**
 	 * @method requestInstallPermissions
-	 * @params callback->回调函数
+	 * @params callback->回调函数,apkPath->apk安装路径
 	 * @return
 	 * @desc 动态请求安装未知应用的权限
 	 */
-	requestInstallPermissions(callback){
+	requestInstallPermissions(apkPath,callback){
 		var thiz = this;
 		if(callback){
-			ToastExample.requestInstallPermissions((msg)=>{console.log(msg)},(err)=>{console.log(err)});
+			ToastExample.requestInstallPermissions(apkPath,(msg)=>{console.log(msg)},(err)=>{console.log(err)});
 			callback();
 		}else{
-			ToastExample.requestInstallPermissions((msg)=>{console.log(msg)},(err)=>{console.log(err)});
+			ToastExample.requestInstallPermissions(apkPath,(msg)=>{console.log(msg)},(err)=>{console.log(err)});
 		}
 		
 	} 

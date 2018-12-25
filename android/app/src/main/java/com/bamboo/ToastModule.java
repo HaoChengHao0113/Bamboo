@@ -45,7 +45,8 @@ public class ToastModule extends ReactContextBaseJavaModule {
   }
 
   @ReactMethod
-  public void requestInstallPermissions(Callback successCallback,Callback errorCallback) {
+  public void requestInstallPermissions(String path,Callback successCallback,Callback errorCallback) {
+    Log.d("----------------------path-------------------------",path);
      try{
         if (Build.VERSION.SDK_INT >= 26) {
           boolean b = getReactApplicationContext().getPackageManager().canRequestPackageInstalls(); 
