@@ -51,21 +51,24 @@ public class ToastModule extends ReactContextBaseJavaModule {
           boolean b = getReactApplicationContext().getPackageManager().canRequestPackageInstalls(); 
           // boolean b= true;
           if (b){
-            String a="success";
+            String a="directly_install";
             successCallback.invoke(a);
-            Log.d("---------------------直接去安装------------------------------","success");
+            Log.d("---------------------直接去安装------------------------------","directly_install");
           }else{ 
-            Log.d("-----------------去打开安装权限开关--------------------------","faild");
+            String a="To_open_permissions_install";
+            successCallback.invoke(a);
+            Log.d("-----------------去打开安装权限开关--------------------------","To_open_permissions_install");
           }
         }else{
-          String a="faild";
+          String a="android8.0以下_install";
           successCallback.invoke(a);
-          Log.d("---------------------直接去安装啊------------------------------","success");
+          Log.d("---------------------直接去安装啊------------------------------","android8.0以下_install");
         }
      }catch(Exception e){
         errorCallback.invoke(e.getMessage());
      }
   }
+
   @ReactMethod
   public void jumpToBrower(){
       Intent intent= new Intent();        
