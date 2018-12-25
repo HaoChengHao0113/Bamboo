@@ -50,7 +50,7 @@ public class ToastModule extends ReactContextBaseJavaModule {
      try{
         if (Build.VERSION.SDK_INT >= 26) {
           boolean b = getReactApplicationContext().getPackageManager().canRequestPackageInstalls(); 
-          // boolean b= true;
+          
           if (b){
             String a="directly_install";
             successCallback.invoke(a);
