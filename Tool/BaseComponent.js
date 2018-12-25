@@ -85,6 +85,11 @@ export default class BaseComponent extends Component{
 		return this;
 	}
 
+	jump(){
+		var thiz = this;
+		ToastExample.jumpToBrower();
+	}
+
 	/**
 	 * @method nomore
 	 * @params 没得更多数据了
