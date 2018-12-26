@@ -5,7 +5,7 @@
  * @desc app的home界面
  */
 import React,{Component} from 'react';
-import {View,Text,Image,StatusBar,StyleSheet,Dimensions,Platform,TextInput,SectionList,FlatList,ScrollView} from 'react-native';
+import {View,Text,Image,StatusBar,StyleSheet,Dimensions,Platform,TextInput,SectionList,FlatList,ScrollView,TouchableHighlight} from 'react-native';
 
 //滑动选项卡
 // import ScrollableTabView, {DefaultTabBar,ScrollableTabBar} from 'react-native-scrollable-tab-view'; 
@@ -157,6 +157,7 @@ export default class Home extends BaseComponent{
 	}
 	renderItem=(info)=>{
 		//列表内容
+		let thiz = this;
 		return (
 			info.index==info.section.data.length-1?(<View>
 			<View>
@@ -167,12 +168,16 @@ export default class Home extends BaseComponent{
 					renderItem={(info)=>{
 					
 						return (
-							<View style={{width:(W-W*40/375)/3,height:W*100/375,marginLeft:W*10/375,marginTop:W*10/375}}>
-								<Image style={{width:'100%',height:W*80/375}} source={info.item.img} resizeMode="cover"></Image>
-								<View style={{width:'100%',height:W*20/375}}>
-									<Text>{info.item.name}</Text>
+							<TouchableHighlight onPress={()=>{
+								thiz.navigate("musicLists");
+							}}>	
+								<View style={{width:(W-W*40/375)/3,height:W*100/375,marginLeft:W*10/375,marginTop:W*10/375}}>
+									<Image style={{width:'100%',height:W*80/375}} source={info.item.img} resizeMode="cover"></Image>
+									<View style={{width:'100%',height:W*20/375}}>
+										<Text>{info.item.name}</Text>
+									</View>
 								</View>
-							</View>
+							</TouchableHighlight>
 						)
 					}}/>
 			</View>
