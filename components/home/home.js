@@ -5,7 +5,7 @@
  * @desc app的home界面
  */
 import React,{Component} from 'react';
-import {View,Text,Image,StatusBar,StyleSheet,Dimensions,Platform,TextInput,SectionList,FlatList,ScrollView,TouchableHighlight} from 'react-native';
+import {View,Text,Image,StatusBar,StyleSheet,Dimensions,Platform,TextInput,SectionList,FlatList,ScrollView,TouchableWithoutFeedback} from 'react-native';
 
 //滑动选项卡
 // import ScrollableTabView, {DefaultTabBar,ScrollableTabBar} from 'react-native-scrollable-tab-view'; 
@@ -37,7 +37,7 @@ export default class Home extends BaseComponent{
 	constructor(props){
 		super(props);
 		this.state={
-			//状态
+			seconds:0,
 		};
 		console.log("------------------------------constructor---------------------------");
 	}
@@ -59,6 +59,7 @@ export default class Home extends BaseComponent{
 	}
 	//渲染界面
 	render(){
+		let thiz = this;
 		console.log("----------------------render-------------");
 		return (
 		<View style={{flex:1,backgroundColor:'#fff'}}>
@@ -71,7 +72,12 @@ export default class Home extends BaseComponent{
 						<Text>请输入查找歌曲</Text>
 					</View>
 					{/*搜索框*/}
-					<Image style={{width:H*0.044,height:H*0.044,marginTop:H*0.013,marginLeft:W*0.05}} source={require('../../image/home/erji.png')}></Image>
+					<View style={{width:BaseComponent.W*35/375,height:'50%',flexDirection:'row',justifyContent:'center',alignItems:'flex-end',marginTop:H*0.013,marginLeft:BaseComponent.W*10/375}}>
+						<View style={{width:2,height:thiz.state.seconds%2==0?BaseComponent.W*10/375:BaseComponent.W*20/375,backgroundColor:'white'}}></View>
+						<View style={{width:2,height:thiz.state.seconds%2==0?BaseComponent.W*20/375:BaseComponent.W*10/375,backgroundColor:'white',marginLeft:4}}></View>
+						<View style={{width:2,height:thiz.state.seconds%2==0?BaseComponent.W*12/375:BaseComponent.W*16/375,backgroundColor:'white',marginLeft:4}}></View>
+						<View style={{width:2,height:thiz.state.seconds%2==0?BaseComponent.W*16/375:BaseComponent.W*12/375,backgroundColor:'white',marginLeft:4}}></View>
+					</View>
 				</View>
 				{/*Tab滑动选项*/}
 				<View style={styles.tab}>
@@ -168,8 +174,9 @@ export default class Home extends BaseComponent{
 					renderItem={(info)=>{
 					
 						return (
-							<TouchableHighlight onPress={()=>{
-								thiz.navigate("musicLists");
+							<TouchableWithoutFeedback onPress={()=>{
+								thiz.log("--------------------------info--------------------------",info);
+								thiz.navigate("musicLists",{info:info});
 							}}>	
 								<View style={{width:(W-W*40/375)/3,height:W*100/375,marginLeft:W*10/375,marginTop:W*10/375}}>
 									<Image style={{width:'100%',height:W*80/375}} source={info.item.img} resizeMode="cover"></Image>
@@ -177,7 +184,7 @@ export default class Home extends BaseComponent{
 										<Text>{info.item.name}</Text>
 									</View>
 								</View>
-							</TouchableHighlight>
+							</TouchableWithoutFeedback>
 						)
 					}}/>
 			</View>
