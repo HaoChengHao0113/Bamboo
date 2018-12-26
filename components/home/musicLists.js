@@ -84,7 +84,8 @@ export default class musicLists extends BaseComponent{
 						<View style={{width:2,height:thiz.state.seconds%2==0?BaseComponent.W*16/375:BaseComponent.W*12/375,backgroundColor:'white',marginLeft:4}}></View>
 					</View>
 				</View>
-
+				
+				{/*封面专辑下载等*/}
 				<View style={{width:BaseComponent.W,backgroundColor:'#bf8691',}}>
 					<View style={{width:BaseComponent.W,height:BaseComponent.W*120/375,marginTop:BaseComponent.W*10/375,flexDirection:'row'}}>
 						<View style={{width:BaseComponent.W*120/375,height:BaseComponent.W*120/375,marginLeft:BaseComponent.W*12/375,borderWidth:1,borderRadius:5,borderColor:'yellow',justifyContent:'center',alignItems:'center'}}>
@@ -94,8 +95,40 @@ export default class musicLists extends BaseComponent{
 						<View style={{width:BaseComponent.W*220/375,height:BaseComponent.W*120/375,marginLeft:BaseComponent.W*10/375}}>
 							<Text style={{fontSize:BaseComponent.W*15/375,color:'white',fontWeight:'bold',lineHeight:20}} selectable={true} ellipsizeMode="tail" numberOfLines={6}>谈恋爱的最好季节,你找到喜欢的人了吗</Text>
 						</View>
+					</View>
+
+					<View style={{width:BaseComponent.W,height:BaseComponent.W*60/375,backgroundColor:'#bf8691',marginTop:BaseComponent.W*20/375,flexDirection:'row',alignItems:'center',justifyContent:'space-around'}}>
+						<View style={{width:BaseComponent.W*60/375,height:BaseComponent.W*60/375,justifyContent:'center',alignItems:'center'}}>
+							<View style={{width:BaseComponent.W*25/375,height:BaseComponent.W*25/375}}>
+								<Image style={{width:BaseComponent.W*25/375,height:BaseComponent.W*25/375}} source={require('../../image/home/discuss.png')}/>
+							</View>
+							<Text style={{fontSize:BaseComponent.W*13/375,color:'white',marginTop:3}}>138</Text>
+						</View>
+
+						<View style={{width:BaseComponent.W*60/375,height:BaseComponent.W*60/375,justifyContent:'center',alignItems:'center'}}>
+							<View style={{width:BaseComponent.W*25/375,height:BaseComponent.W*25/375}}>
+								<Image style={{width:BaseComponent.W*25/375,height:BaseComponent.W*25/375}} source={require('../../image/home/forwarding.png')}/>
+							</View>
+							<Text style={{fontSize:BaseComponent.W*13/375,color:'white',marginTop:3}}>42</Text>
+						</View>
+
+						<View style={{width:BaseComponent.W*60/375,height:BaseComponent.W*60/375,justifyContent:'center',alignItems:'center'}}>
+							<View style={{width:BaseComponent.W*25/375,height:BaseComponent.W*25/375}}>
+								<Image style={{width:BaseComponent.W*25/375,height:BaseComponent.W*25/375}} source={require('../../image/home/download.png')}/>
+							</View>
+							<Text style={{fontSize:BaseComponent.W*13/375,color:'white',marginTop:3}}>下载</Text>
+						</View>
+
+						<View style={{width:BaseComponent.W*60/375,height:BaseComponent.W*60/375,justifyContent:'center',alignItems:'center'}}>
+							<View style={{width:BaseComponent.W*25/375,height:BaseComponent.W*25/375}}>
+								<Image style={{width:BaseComponent.W*25/375,height:BaseComponent.W*25/375}} source={require('../../image/home/discuss.png')}/>
+							</View>
+							<Text style={{fontSize:BaseComponent.W*13/375,color:'white',marginTop:3}}>多选</Text>
+						</View>
+						
 					</View>	
 				</View>
+
 			</View>
 		)
 	}
