@@ -23,15 +23,15 @@ export default class musicLists extends BaseComponent{
 				}
 			},
 			height:new Animated.Value(BaseComponent.W*10/375),
-			height1:BaseComponent.W*20/375,
-			height2:BaseComponent.W*12/375,
-			height3:BaseComponent.W*16/375,
+			height1:new Animated.Value(BaseComponent.W*20/375),
+			height2:new Animated.Value(BaseComponent.W*12/375),
+			height3:new Animated.Value(BaseComponent.W*16/375),
 		}
 	}
 			
 	componentDidMount(){
 		let thiz = this;
-
+		thiz.achieveAnimation();
  		if(thiz.params.info){
  			let info = thiz.params.info;
  			thiz.setState({info:info});
@@ -44,25 +44,60 @@ export default class musicLists extends BaseComponent{
 		this.timer && clearInterval(this.timer);
 	}
 
-	//实现音乐竖线的动画
+	//实现音乐竖线的动画由低到高
 	achieveAnimation=()=>{
 		var thiz = this;
-		thiz.height = Animated.timing(thiz.state.height,{
+		Animated.timing(thiz.state.height,{
 			toValue:BaseComponent.W*20/375,
 			duration:1000
-		}).start(()=>{
-			thiz.achieveAnimation1();
-		})
-	}
+		}).start();
 
+		Animated.timing(thiz.state.height1,{
+			toValue:BaseComponent.W*20/375,
+			duration:1000
+		}).start();
+
+		Animated.timing(thiz.state.height2,{
+			toValue:BaseComponent.W*16/375,
+			duration:1000
+		}).start();
+
+		Animated.timing(thiz.state.height3,{
+			toValue:BaseComponent.W*12/375,
+			duration:1000
+		}).start();
+
+		setTimeout(function(){
+			thiz.achieveAnimation1();
+		},1000);
+	}
+	//实现音乐竖线的动画由高到低
 	achieveAnimation1=()=>{
 		var thiz = this;
-		thiz.height = Animated.timing(thiz.state.height,{
+		Animated.timing(thiz.state.height,{
 			toValue:BaseComponent.W*10/375,
 			duration:1000
-		}).start(()=>{
+		}).start();
+
+		Animated.timing(thiz.state.height1,{
+			toValue:BaseComponent.W*10/375,
+			duration:1000
+		}).start();
+
+		Animated.timing(thiz.state.height2,{
+			toValue:BaseComponent.W*12/375,
+			duration:1000
+		}).start();
+
+		Animated.timing(thiz.state.height3,{
+			toValue:BaseComponent.W*16/375,
+			duration:1000
+		}).start();
+
+		setTimeout(function(){
 			thiz.achieveAnimation();
-		})
+		},1000);
+
 	}
 
 
@@ -93,9 +128,9 @@ export default class musicLists extends BaseComponent{
 
 					<View style={{width:BaseComponent.W*35/375,height:'50%',flexDirection:'row',justifyContent:'center',alignItems:'flex-end'}}>
 						<Animated.View style={{width:2,height:thiz.state.height,backgroundColor:'white',borderTopRadius:1}}></Animated.View>
-						<View style={{width:2,height:thiz.state.seconds%2==0?BaseComponent.W*20/375:BaseComponent.W*10/375,backgroundColor:'white',marginLeft:4}}></View>
-						<View style={{width:2,height:thiz.state.seconds%2==0?BaseComponent.W*12/375:BaseComponent.W*16/375,backgroundColor:'white',marginLeft:4}}></View>
-						<View style={{width:2,height:thiz.state.seconds%2==0?BaseComponent.W*16/375:BaseComponent.W*12/375,backgroundColor:'white',marginLeft:4}}></View>
+						<Animated.View style={{width:2,height:thiz.state.height1,backgroundColor:'white',marginLeft:4,borderTopRadius:1}}></Animated.View>
+						<Animated.View style={{width:2,height:thiz.state.height2,backgroundColor:'white',marginLeft:4,borderTopRadius:1}}></Animated.View>
+						<Animated.View style={{width:2,height:thiz.state.height3,backgroundColor:'white',marginLeft:4,borderTopRadius:1}}></Animated.View>
 					</View>
 				</View>
 				
