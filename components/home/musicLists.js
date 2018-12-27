@@ -5,7 +5,7 @@
  * @desc 音乐列表界面
  */
 import React,{Component} from 'react';
-import {View,Text,Image,StatusBar,StyleSheet,Dimensions,Platform,TextInput,SectionList,FlatList,ScrollView,TouchableOpacity} from 'react-native';
+import {View,Text,Image,StatusBar,StyleSheet,Dimensions,Platform,TextInput,SectionList,FlatList,ScrollView,TouchableOpacity,Animated} from 'react-native';
 
 
 import BaseComponent from '../../Tool/BaseComponent';
@@ -22,7 +22,11 @@ export default class musicLists extends BaseComponent{
 					img:""
 				}
 			},
-		};
+			height:new Animated.Value(BaseComponent.W*10/375),
+			height1:BaseComponent.W*20/375,
+			height2:BaseComponent.W*12/375,
+			height3:BaseComponent.W*16/375,
+		}
 	}
 			
 	componentDidMount(){
@@ -44,6 +48,27 @@ export default class musicLists extends BaseComponent{
 		this.timer && clearInterval(this.timer);
 	}
 
+	//实现音乐竖线的动画
+	achieveAnimation=()=>{
+		var thiz = this;
+		Animated.timing(thiz.state.height,{
+			toValue:BaseComponent.W*20/375,
+			duration:1000
+		}).start(()=>{
+			thiz.achieveAnimation1();
+		});
+	}
+
+	achieveAnimation1=()=>{
+		var thiz = this;
+		Animated.timing(thiz.state.height,{
+			toValue:BaseComponent.W*10/375,
+			duration:1000
+		}).start(()=>{
+			thiz.achieveAnimation();
+		});
+	}
+
 	//获取放歌时间的动画
 	getAnimation=()=>{
 		let thiz = this;
@@ -56,7 +81,7 @@ export default class musicLists extends BaseComponent{
 	//渲染界面
 	render(){
 		let thiz = this;
-		
+		thiz.achieveAnimation();
 		return (
 			<View style={{flex:1,backgroundColor:'#fff'}}>
 				{/*顶部导航栏*/}
@@ -78,7 +103,7 @@ export default class musicLists extends BaseComponent{
 					</View>
 
 					<View style={{width:BaseComponent.W*35/375,height:'50%',flexDirection:'row',justifyContent:'center',alignItems:'flex-end'}}>
-						<View style={{width:2,height:thiz.state.seconds%2==0?BaseComponent.W*10/375:BaseComponent.W*20/375,backgroundColor:'white'}}></View>
+						<Animated.View style={{width:2,height:thiz.state.height,backgroundColor:'white'}}></Animated.View>
 						<View style={{width:2,height:thiz.state.seconds%2==0?BaseComponent.W*20/375:BaseComponent.W*10/375,backgroundColor:'white',marginLeft:4}}></View>
 						<View style={{width:2,height:thiz.state.seconds%2==0?BaseComponent.W*12/375:BaseComponent.W*16/375,backgroundColor:'white',marginLeft:4}}></View>
 						<View style={{width:2,height:thiz.state.seconds%2==0?BaseComponent.W*16/375:BaseComponent.W*12/375,backgroundColor:'white',marginLeft:4}}></View>
