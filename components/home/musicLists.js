@@ -26,12 +26,14 @@ export default class musicLists extends BaseComponent{
 			height1:new Animated.Value(BaseComponent.W*20/375),
 			height2:new Animated.Value(BaseComponent.W*12/375),
 			height3:new Animated.Value(BaseComponent.W*16/375),
+
+			MusicData:[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,,],//音乐列表数据源
 		}
 	}
 			
 	componentDidMount(){
 		let thiz = this;
-		thiz.achieveAnimation();
+		
  		if(thiz.params.info){
  			let info = thiz.params.info;
  			thiz.setState({info:info});
@@ -41,7 +43,8 @@ export default class musicLists extends BaseComponent{
 	};
 	componentWillUnmount(){
 		var thiz = this;
-		this.timer && clearInterval(this.timer);
+		this.timer && clearTimeout(this.timer);
+		this.timer1 && clearTimeout(this.timer1);
 	}
 
 	//实现音乐竖线的动画由低到高
@@ -67,10 +70,11 @@ export default class musicLists extends BaseComponent{
 			duration:1000
 		}).start();
 
-		setTimeout(function(){
+		thiz.timer = setTimeout(function(){
 			thiz.achieveAnimation1();
 		},1000);
 	}
+
 	//实现音乐竖线的动画由高到低
 	achieveAnimation1=()=>{
 		var thiz = this;
@@ -94,13 +98,31 @@ export default class musicLists extends BaseComponent{
 			duration:1000
 		}).start();
 
-		setTimeout(function(){
+		thiz.timer1 = setTimeout(function(){
 			thiz.achieveAnimation();
 		},1000);
 
 	}
 
+	_keyExtractor=(item,index)=>index.toString();
 
+	//音乐列表头部
+	ListHeaderComponent=()=>{
+		var thiz = this;
+
+		return (
+			<View style={{width:BaseComponent.W,height:BaseComponent.W*60/375,backgroundColor:'blue'}}></View>
+		) 
+	}
+
+	//音乐列表界面
+	renderItem=(item)=>{
+		var thiz = this;
+
+		return (
+			<View style={{width:BaseComponent.W,height:BaseComponent.W*50/375,backgroundColor:'red',marginTop:5}}></View>
+		)
+	}
 
 	//渲染界面
 	render(){
@@ -178,6 +200,13 @@ export default class musicLists extends BaseComponent{
 					</View>	
 				</View>
 
+				{/*歌曲列表*/}
+				<FlatList
+					data={thiz.state.MusicData}
+					keyExtractor={thiz._keyExtractor}
+					renderItem={thiz.renderItem}
+					ListHeaderComponent={thiz.ListHeaderComponent}
+				/>
 			</View>
 		)
 	}

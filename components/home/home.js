@@ -68,10 +68,15 @@ export default class Home extends BaseComponent{
 				{/*顶部导航栏*/}
 				<View style={styles.narbar}>
 					{/*搜索框*/}
-					<View style={styles.searchBox}>
-						<Text>请输入查找歌曲</Text>
-					</View>
+					<TouchableWithoutFeedback onPress={()=>{
+						thiz.navigate("ReactNativeDemo",{title:'aaa'});
+					}}>
+						<View style={styles.searchBox}>
+							<Text>请输入查找歌曲</Text>
+						</View>
+					</TouchableWithoutFeedback>	
 					{/*搜索框*/}
+
 					<View style={{width:BaseComponent.W*35/375,height:'50%',flexDirection:'row',justifyContent:'center',alignItems:'flex-end',marginTop:H*0.013,marginLeft:BaseComponent.W*10/375}}>
 						<View style={{width:2,height:thiz.state.seconds%2==0?BaseComponent.W*10/375:BaseComponent.W*20/375,backgroundColor:'white'}}></View>
 						<View style={{width:2,height:thiz.state.seconds%2==0?BaseComponent.W*20/375:BaseComponent.W*10/375,backgroundColor:'white',marginLeft:4}}></View>
@@ -95,57 +100,59 @@ export default class Home extends BaseComponent{
 
 			{/*轮播图*/}
 			<ScrollView>
-			<View style={{width:W,backgroundColor:'#d84236',paddingBottom:10}}>
-				<View style={styles.swiper}>
-					<Swiper style={{width:'100%',height:'100%'}}
-					        autoplay={true}
-	                        horizontal={true}>
-						{this.getBanner(BannerData)}
-					</Swiper>
-				</View>
-			</View>	
+				<View style={{width:W,backgroundColor:'#d84236',paddingBottom:10}}>
+					<View style={styles.swiper}>
+						<Swiper style={{width:'100%',height:'100%'}}
+						        autoplay={true}
+		                        horizontal={true}>
+							{this.getBanner(BannerData)}
+						</Swiper>
+					</View>
+				</View>	
 
-			{/*每日推荐歌曲*/}
-			<ScrollView showsVerticalScrollIndicator = {false}>
-			<View style={styles.dailyMusic}>
-				<View style={{width:W*70/375,height:'100%',alignItems:'center'}}>
-					<View style={{width:W*56/375,height:W*56/375,borderRadius:W*28/375,backgroundColor:'#d84236',justifyContent:'center',alignItems:'center'}}>
-						<Image style={{width:W*35/375,height:W*35/375}} source={require('../../image/home/FM.png')}></Image>
+				{/*每日推荐歌曲*/}
+				<ScrollView showsVerticalScrollIndicator = {false}>
+					<View style={styles.dailyMusic}>
+						<View style={{width:W*70/375,height:'100%',alignItems:'center'}}>
+							<View style={{width:W*56/375,height:W*56/375,borderRadius:W*28/375,backgroundColor:'#d84236',justifyContent:'center',alignItems:'center'}}>
+								<Image style={{width:W*35/375,height:W*35/375}} source={require('../../image/home/FM.png')}></Image>
+							</View>
+							<Text style={{fontSize:W*15/375,color:'black',marginTop:W*5/375}}>私人FM</Text>
+						</View>
+						<View style={{width:W*70/375,height:'100%',alignItems:'center'}}>
+							<View style={{width:W*56/375,height:W*56/375,borderRadius:W*28/375,backgroundColor:'#d84236',justifyContent:'center',alignItems:'center'}}>
+								<Image style={{width:W*25/375,height:W*25/375}} source={require('../../image/home/rili.png')}></Image>
+							</View>
+							<Text style={{fontSize:W*15/375,color:'black',marginTop:W*5/375}}>每日推荐</Text>
+						</View>
+						<View style={{width:W*70/375,height:'100%',alignItems:'center'}}>
+							<View style={{width:W*56/375,height:W*56/375,borderRadius:W*28/375,backgroundColor:'#d84236',justifyContent:'center',alignItems:'center'}}>
+								<Image style={{width:W*25/375,height:W*25/375}} source={require('../../image/home/gedan.png')}></Image>
+							</View>
+							<Text style={{fontSize:W*15/375,color:'black',marginTop:W*5/375}}>歌单</Text>
+						</View>
+						<View style={{width:W*70/375,height:'100%',alignItems:'center'}}>
+							<View style={{width:W*56/375,height:W*56/375,borderRadius:W*28/375,backgroundColor:'#d84236',justifyContent:'center',alignItems:'center'}}>
+								<Image style={{width:W*25/375,height:W*25/375}} source={require('../../image/home/paihangbang.png')}></Image>
+							</View>
+							<Text style={{fontSize:W*15/375,color:'black',marginTop:W*5/375}}>排行榜</Text>
+						</View>
 					</View>
-					<Text style={{fontSize:W*15/375,color:'black',marginTop:W*5/375}}>私人FM</Text>
-				</View>
-				<View style={{width:W*70/375,height:'100%',alignItems:'center'}}>
-					<View style={{width:W*56/375,height:W*56/375,borderRadius:W*28/375,backgroundColor:'#d84236',justifyContent:'center',alignItems:'center'}}>
-						<Image style={{width:W*25/375,height:W*25/375}} source={require('../../image/home/rili.png')}></Image>
-					</View>
-					<Text style={{fontSize:W*15/375,color:'black',marginTop:W*5/375}}>每日推荐</Text>
-				</View>
-				<View style={{width:W*70/375,height:'100%',alignItems:'center'}}>
-					<View style={{width:W*56/375,height:W*56/375,borderRadius:W*28/375,backgroundColor:'#d84236',justifyContent:'center',alignItems:'center'}}>
-						<Image style={{width:W*25/375,height:W*25/375}} source={require('../../image/home/gedan.png')}></Image>
-					</View>
-					<Text style={{fontSize:W*15/375,color:'black',marginTop:W*5/375}}>歌单</Text>
-				</View>
-				<View style={{width:W*70/375,height:'100%',alignItems:'center'}}>
-					<View style={{width:W*56/375,height:W*56/375,borderRadius:W*28/375,backgroundColor:'#d84236',justifyContent:'center',alignItems:'center'}}>
-						<Image style={{width:W*25/375,height:W*25/375}} source={require('../../image/home/paihangbang.png')}></Image>
-					</View>
-					<Text style={{fontSize:W*15/375,color:'black',marginTop:W*5/375}}>排行榜</Text>
-				</View>
-			</View>
 
-			<View style={{width:"100%",height:0.5,backgroundColor:'#e6e6e6',marginTop:W*10/375}}></View>
-		
-			{/*循环列表*/}
-			<SectionList
-				sections={Songlist}
-				renderSectionHeader={this.sectionHeader}
-          		renderItem={this.renderItem}
-                keyExtractor={this.keyExtractor}
-                showsVerticalScrollIndicator = {false}
-			/>
+					<View style={{width:"100%",height:0.5,backgroundColor:'#e6e6e6',marginTop:W*10/375}}></View>
+				
+					{/*循环列表*/}
+					<SectionList
+						sections={Songlist}
+						renderSectionHeader={this.sectionHeader}
+		          		renderItem={this.renderItem}
+		                keyExtractor={this.keyExtractor}
+		                showsVerticalScrollIndicator = {false}
+					/>
+
+				</ScrollView>
 			</ScrollView>
-			</ScrollView>
+
 		</View>
 		)
 	}

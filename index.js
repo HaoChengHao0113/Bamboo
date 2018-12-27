@@ -9,6 +9,8 @@ import Dynamic from './components/dynamic/dynamic';
 import Account from './components/account/account';
 import Guide from './components/common/Guide';
 import musicLists from './components/home/musicLists';
+
+
 import {createBottomTabNavigator,createStackNavigator} from 'react-navigation';
 console.disableYellowBox = true;
 const Tab=createBottomTabNavigator(
