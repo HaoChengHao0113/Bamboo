@@ -69,7 +69,7 @@ export default class Home extends BaseComponent{
 				<View style={styles.narbar}>
 					{/*搜索框*/}
 					<TouchableWithoutFeedback onPress={()=>{
-						thiz.navigate("ReactNativeDemo",{title:'aaa'});
+						
 					}}>
 						<View style={styles.searchBox}>
 							<Text>请输入查找歌曲</Text>

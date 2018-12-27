@@ -111,7 +111,23 @@ export default class musicLists extends BaseComponent{
 		var thiz = this;
 
 		return (
-			<View style={{width:BaseComponent.W,height:BaseComponent.W*60/375,backgroundColor:'blue'}}></View>
+			<View style={{width:BaseComponent.W,height:BaseComponent.W*60/375,backgroundColor:'#bf8691'}}>
+				<View style={{width:BaseComponent.W,height:BaseComponent.W*60/375,backgroundColor:'white',borderTopLeftRadius:10, borderTopRightRadius:10,flexDirection:"row",alignItems:'center'}}>
+					<View style={{width:BaseComponent.W*30/375,height:BaseComponent.W*30/375,borderRadius:BaseComponent.W*15/375,marginLeft:BaseComponent.W*10/375}}>
+						<Image style={{width:BaseComponent.W*30/375,height:BaseComponent.W*30/375}} source={require('../../image/home/play.png')}/>
+					</View>
+
+					<Text style={{fontSize:BaseComponent.W*17/375,color:'#3a3a3a',marginLeft:BaseComponent.W*13/375}}>播放全部</Text>
+					
+					<Text style={{fontSize:BaseComponent.W*14/375,color:'#bdbebe'}}>(共50首)</Text>
+					
+					<View style={{width:BaseComponent.W*120/375,height:BaseComponent.W*60/375,backgroundColor:'red',position:'absolute',right:0,borderTopRightRadius:10,flexDirection:'row',alignItems:'center',justifyContent:'center'}}>
+						<Image style={{width:BaseComponent.W*20/375,height:BaseComponent.W*20/375}} source={require('../../image/home/add.png')}/>
+						<Text style={{fontSize:BaseComponent.W*15/375,color:'white'}}>收藏</Text>
+						<Text style={{fontSize:BaseComponent.W*15/375,color:'white'}}>(5002)</Text>
+					</View>	
+				</View>
+			</View>
 		) 
 	}
 
@@ -120,7 +136,7 @@ export default class musicLists extends BaseComponent{
 		var thiz = this;
 
 		return (
-			<View style={{width:BaseComponent.W,height:BaseComponent.W*50/375,backgroundColor:'red',marginTop:5}}></View>
+			<View style={{width:BaseComponent.W,height:BaseComponent.W*50/375,backgroundColor:'yellow',}}></View>
 		)
 	}
 
@@ -149,15 +165,15 @@ export default class musicLists extends BaseComponent{
 					</View>
 
 					<View style={{width:BaseComponent.W*35/375,height:'50%',flexDirection:'row',justifyContent:'center',alignItems:'flex-end'}}>
-						<Animated.View style={{width:2,height:thiz.state.height,backgroundColor:'white',borderTopRadius:1}}></Animated.View>
-						<Animated.View style={{width:2,height:thiz.state.height1,backgroundColor:'white',marginLeft:4,borderTopRadius:1}}></Animated.View>
-						<Animated.View style={{width:2,height:thiz.state.height2,backgroundColor:'white',marginLeft:4,borderTopRadius:1}}></Animated.View>
-						<Animated.View style={{width:2,height:thiz.state.height3,backgroundColor:'white',marginLeft:4,borderTopRadius:1}}></Animated.View>
+						<Animated.View style={{width:2,height:thiz.state.height,backgroundColor:'white',borderTopLeftRadius:1,borderTopRightRadius:1}}></Animated.View>
+						<Animated.View style={{width:2,height:thiz.state.height1,backgroundColor:'white',marginLeft:4,borderTopLeftRadius:1,borderTopRightRadius:1}}></Animated.View>
+						<Animated.View style={{width:2,height:thiz.state.height2,backgroundColor:'white',marginLeft:4,borderTopLeftRadius:1,borderTopRightRadius:1}}></Animated.View>
+						<Animated.View style={{width:2,height:thiz.state.height3,backgroundColor:'white',marginLeft:4,borderTopLeftRadius:1,borderTopRightRadius:1}}></Animated.View>
 					</View>
 				</View>
 				
 				{/*封面专辑下载等*/}
-				<View style={{width:BaseComponent.W,backgroundColor:'#bf8691',}}>
+				<View style={{width:BaseComponent.W,backgroundColor:'#bf8691',paddingBottom:BaseComponent.W*10/375}}>
 					<View style={{width:BaseComponent.W,height:BaseComponent.W*120/375,marginTop:BaseComponent.W*10/375,flexDirection:'row'}}>
 						<View style={{width:BaseComponent.W*120/375,height:BaseComponent.W*120/375,marginLeft:BaseComponent.W*12/375,borderWidth:1,borderRadius:5,borderColor:'yellow',justifyContent:'center',alignItems:'center'}}>
 							<Image style={{width:BaseComponent.W*118/375,height:BaseComponent.W*118/375,borderRadius:5}} source={thiz.state.info.item.img}/>
@@ -192,7 +208,7 @@ export default class musicLists extends BaseComponent{
 
 						<View style={{width:BaseComponent.W*60/375,height:BaseComponent.W*60/375,justifyContent:'center',alignItems:'center'}}>
 							<View style={{width:BaseComponent.W*25/375,height:BaseComponent.W*25/375}}>
-								<Image style={{width:BaseComponent.W*25/375,height:BaseComponent.W*25/375}} source={require('../../image/home/discuss.png')}/>
+								<Image style={{width:BaseComponent.W*25/375,height:BaseComponent.W*25/375}} source={require('../../image/home/multiselect.png')}/>
 							</View>
 							<Text style={{fontSize:BaseComponent.W*13/375,color:'white',marginTop:3}}>多选</Text>
 						</View>
