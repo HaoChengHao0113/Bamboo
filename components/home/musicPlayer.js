@@ -29,9 +29,9 @@ export default class musicPlayer extends BaseComponent{
 		let thiz = this;
 		
 		return (
-			<View style={{flex:1,backgroundColor:'#fff'}}>
+			<View style={{flex:1,backgroundColor:'#9e9e9e'}}>
 				{/*顶部导航栏*/}
-				<View style={{width:BaseComponent.W,height:BaseComponent.W*70/375,backgroundColor:'#bf8691',paddingTop:thiz.isIphoneX(30,BaseComponent.SH),flexDirection:'row',alignItems:'center'}}>
+				<View style={{width:BaseComponent.W,height:BaseComponent.W*70/375,paddingTop:thiz.isIphoneX(30,BaseComponent.SH),flexDirection:'row',alignItems:'center'}}>
 					<TouchableOpacity onPress={()=>{
 						thiz.goBack();
 					}}>
@@ -39,6 +39,20 @@ export default class musicPlayer extends BaseComponent{
 							<Image style={{width:'100%',height:BaseComponent.W*22/375}} source={require('../../image/home/back.png')}/>
 						</View>
 					</TouchableOpacity>		
+
+					<View style={{width:BaseComponent.W*220/375,height:'100%',marginLeft:BaseComponent.W*10/375}}>
+						<Text style={{fontSize:BaseComponent.W*15/375,color:'white'}}>苦中作乐</Text>
+						<View style={{width:'100%',height:BaseComponent.W*20/375,flexDirection:'row',alignItems:'center'}}>
+							<Text style={{fontSize:BaseComponent.W*13/375,color:'white',maxwidth:BaseComponent.W*200/375}} numberOfLines={1}>石白其</Text>
+							<Image style={{width:BaseComponent.W*15/375,height:BaseComponent.W*15/375}} source={require('../../image/home/rightback.png')}/>
+						</View>
+					</View>
+
+					<View style={{width:BaseComponent.W*70/375,height:'70%',backgroundColor:"blue",borderRadius:BaseComponent.W*30/375,flexDirection:'row',alignItems:'center'}}>
+						<View style={{width:BaseComponent.W*30/375,height:'100%',borderRadius:BaseComponent.W*30/375,}}>
+							<Image style={{width:BaseComponent.W*30/375,height:'100%',borderRadius:BaseComponent.W*30/375}} source={require('../../image/home/icon.png')} resizeMode="contain"/>
+						</View>
+					</View>
 				</View>
 	
 			</View>
