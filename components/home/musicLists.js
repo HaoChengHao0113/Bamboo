@@ -142,13 +142,19 @@ export default class musicLists extends BaseComponent{
 					<Text style={{fontSize:BaseComponent.W*18/375,color:'#969798',marginLeft:BaseComponent.W*15/375}}>1</Text>
 					<View style={{width:BaseComponent.W*240/375,height:'100%',justifyContent:'center',marginLeft:BaseComponent.W*15/375}}>
 						<Text style={{fontSize:BaseComponent.W*17/375,color:'#3a3a3a'}}>暗恋</Text>
-						<View style={{width:BaseComponent.W*240/375,flexDirection:'row'}}>
+						<View style={{width:BaseComponent.W*240/375,flexDirection:'row',marginTop:3}}>
 							<View style={{width:BaseComponent.W*20/375,height:BaseComponent.W*15/375,borderRadius:3,borderWidth:0.5,borderColor:'red',justifyContent:'center',alignItems:'center'}}>
 								<Text style={{fontSize:BaseComponent.W*10/375,color:"red"}}>SQ</Text>
 							</View>
-							<Text style={{fontSize:BaseComponent.W*12/375,color:'#F0F0F0'}}>陶喆-69乐章</Text>
+							<Text style={{fontSize:BaseComponent.W*12/375,color:'#3a3a3a',paddingLeft:5}}>陶喆-69乐章</Text>
 						</View>
 					</View>
+
+					<View style={{width:BaseComponent.W*80/375,height:'100%',flexDirection:'row',alignItems:'center',justifyContent:'space-between'}}>
+						<Image style={{width:BaseComponent.W*25/375,height:BaseComponent.W*20/375}} source={require('../../image/home/player.png')}/>
+						<Image style={{width:BaseComponent.W*30/375,height:BaseComponent.W*20/375}} source={require('../../image/home/more.png')}/>
+					</View>
+					
 				</View>
 			</View>
 		)
