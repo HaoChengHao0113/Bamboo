@@ -49,9 +49,7 @@ export default class musicPlayer extends BaseComponent{
 					</View>
 
 					<View style={{width:BaseComponent.W*70/375,height:'70%',backgroundColor:"blue",borderRadius:BaseComponent.W*30/375,flexDirection:'row',alignItems:'center'}}>
-						<View style={{width:BaseComponent.W*30/375,height:'100%',borderRadius:BaseComponent.W*30/375,}}>
-							<Image style={{width:BaseComponent.W*30/375,height:'100%',borderRadius:BaseComponent.W*30/375}} source={require('../../image/home/icon.png')} resizeMode="contain"/>
-						</View>
+						<Image style={{width:BaseComponent.W*30/375,height:'100%',borderRadius:BaseComponent.W*30/375,}} source={require('../../image/home/icon.png')}/>
 					</View>
 				</View>
 	
