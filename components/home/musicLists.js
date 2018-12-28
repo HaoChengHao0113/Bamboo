@@ -134,13 +134,21 @@ export default class musicLists extends BaseComponent{
 	//音乐列表界面
 	renderItem=(item)=>{
 		var thiz = this;
-
+		thiz.log("--------------------------item-----------------------------",item);
 		return (
 			<View style={{width:BaseComponent.W,height:BaseComponent.W*50/375,backgroundColor:'white',}}>
 				<View style={{width:BaseComponent.W*322/375,marginLeft:BaseComponent.W*53/375,height:0.5,backgroundColor:"#F0F0F0"}}></View>
-				<View style={{width:BaseComponent.W,height:BaseComponent.W*49.5/375,backgroundColor:'yellow',flexDirection:'row',alignItems:'center'}}>
+				<View style={{width:BaseComponent.W,height:BaseComponent.W*49.5/375,flexDirection:'row',alignItems:'center'}}>
 					<Text style={{fontSize:BaseComponent.W*18/375,color:'#969798',marginLeft:BaseComponent.W*15/375}}>1</Text>
-					<View style={{width:BaseComponent.W*240/375,height:'100%',backgroundColor:'red'}}></View>
+					<View style={{width:BaseComponent.W*240/375,height:'100%',justifyContent:'center',marginLeft:BaseComponent.W*15/375}}>
+						<Text style={{fontSize:BaseComponent.W*17/375,color:'#3a3a3a'}}>暗恋</Text>
+						<View style={{width:BaseComponent.W*240/375,flexDirection:'row'}}>
+							<View style={{width:BaseComponent.W*20/375,height:BaseComponent.W*15/375,borderRadius:3,borderWidth:0.5,borderColor:'red',justifyContent:'center',alignItems:'center'}}>
+								<Text style={{fontSize:BaseComponent.W*10/375,color:"red"}}>SQ</Text>
+							</View>
+							<Text style={{fontSize:BaseComponent.W*12/375,color:'#F0F0F0'}}>陶喆-69乐章</Text>
+						</View>
+					</View>
 				</View>
 			</View>
 		)
