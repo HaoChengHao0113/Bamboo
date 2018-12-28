@@ -9,6 +9,7 @@ import Dynamic from './components/dynamic/dynamic';
 import Account from './components/account/account';
 import Guide from './components/common/Guide';
 import musicLists from './components/home/musicLists';
+import musicPlayer from './components/home/musicPlayer';
 
 
 import {createBottomTabNavigator,createStackNavigator} from 'react-navigation';
@@ -102,6 +103,12 @@ let navConfig={
   },
   musicLists:{
     screen:musicLists,
+    navigationOptions:{
+      header:null
+    }
+  },
+  musicPlayer:{
+    screen:musicPlayer,
     navigationOptions:{
       header:null
     }

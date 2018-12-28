@@ -111,23 +111,27 @@ export default class musicLists extends BaseComponent{
 		var thiz = this;
 
 		return (
-			<View style={{width:BaseComponent.W,height:BaseComponent.W*60/375,backgroundColor:'#bf8691'}}>
-				<View style={{width:BaseComponent.W,height:BaseComponent.W*60/375,backgroundColor:'white',borderTopLeftRadius:10, borderTopRightRadius:10,flexDirection:"row",alignItems:'center'}}>
-					<View style={{width:BaseComponent.W*30/375,height:BaseComponent.W*30/375,borderRadius:BaseComponent.W*15/375,marginLeft:BaseComponent.W*10/375}}>
-						<Image style={{width:BaseComponent.W*30/375,height:BaseComponent.W*30/375}} source={require('../../image/home/play.png')}/>
-					</View>
+			<TouchableOpacity onPress={()=>{
+				thiz.navigate('musicPlayer');
+			}}>
+				<View style={{width:BaseComponent.W,height:BaseComponent.W*60/375,backgroundColor:'#bf8691'}}>
+					<View style={{width:BaseComponent.W,height:BaseComponent.W*60/375,backgroundColor:'white',borderTopLeftRadius:10, borderTopRightRadius:10,flexDirection:"row",alignItems:'center'}}>
+						<View style={{width:BaseComponent.W*30/375,height:BaseComponent.W*30/375,borderRadius:BaseComponent.W*15/375,marginLeft:BaseComponent.W*10/375}}>
+							<Image style={{width:BaseComponent.W*25/375,height:BaseComponent.W*25/375}} source={require('../../image/home/play.png')}/>
+						</View>
 
-					<Text style={{fontSize:BaseComponent.W*17/375,color:'#3a3a3a',marginLeft:BaseComponent.W*13/375}}>播放全部</Text>
-					
-					<Text style={{fontSize:BaseComponent.W*14/375,color:'#bdbebe'}}>(共50首)</Text>
-					
-					<View style={{width:BaseComponent.W*120/375,height:BaseComponent.W*60/375,backgroundColor:'red',position:'absolute',right:0,borderTopRightRadius:10,flexDirection:'row',alignItems:'center',justifyContent:'center'}}>
-						<Image style={{width:BaseComponent.W*20/375,height:BaseComponent.W*20/375}} source={require('../../image/home/add.png')}/>
-						<Text style={{fontSize:BaseComponent.W*15/375,color:'white'}}>收藏</Text>
-						<Text style={{fontSize:BaseComponent.W*15/375,color:'white'}}>(5002)</Text>
-					</View>	
+						<Text style={{fontSize:BaseComponent.W*17/375,color:'#3a3a3a',marginLeft:BaseComponent.W*13/375}}>播放全部</Text>
+						
+						<Text style={{fontSize:BaseComponent.W*14/375,color:'#bdbebe'}}>(共50首)</Text>
+						
+						<View style={{width:BaseComponent.W*120/375,height:BaseComponent.W*60/375,backgroundColor:'red',position:'absolute',right:0,borderTopRightRadius:10,flexDirection:'row',alignItems:'center',justifyContent:'center'}}>
+							<Image style={{width:BaseComponent.W*20/375,height:BaseComponent.W*20/375}} source={require('../../image/home/add.png')}/>
+							<Text style={{fontSize:BaseComponent.W*15/375,color:'white'}}>收藏</Text>
+							<Text style={{fontSize:BaseComponent.W*15/375,color:'white'}}>(5002)</Text>
+						</View>	
+					</View>
 				</View>
-			</View>
+			</TouchableOpacity>
 		) 
 	}
 
