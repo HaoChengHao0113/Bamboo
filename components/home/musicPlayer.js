@@ -40,7 +40,7 @@ export default class musicPlayer extends BaseComponent{
 						</View>
 					</TouchableOpacity>		
 
-					<View style={{width:BaseComponent.W*220/375,height:'100%',marginLeft:BaseComponent.W*10/375}}>
+					<View style={{width:BaseComponent.W*200/375,height:'100%',marginLeft:BaseComponent.W*10/375}}>
 						<Text style={{fontSize:BaseComponent.W*15/375,color:'white'}}>苦中作乐</Text>
 						<View style={{width:'100%',height:BaseComponent.W*20/375,flexDirection:'row',alignItems:'center'}}>
 							<Text style={{fontSize:BaseComponent.W*13/375,color:'white',maxwidth:BaseComponent.W*200/375}} numberOfLines={1}>石白其</Text>
@@ -48,8 +48,14 @@ export default class musicPlayer extends BaseComponent{
 						</View>
 					</View>
 
-					<View style={{width:BaseComponent.W*70/375,height:'70%',backgroundColor:"blue",borderRadius:BaseComponent.W*30/375,flexDirection:'row',alignItems:'center'}}>
+					<View style={{width:BaseComponent.W*75/375,height:'70%',backgroundColor:"#8c8c8c",borderRadius:BaseComponent.W*30/375,flexDirection:'row',alignItems:'center'}}>
 						<Image style={{width:BaseComponent.W*30/375,height:'100%',borderRadius:BaseComponent.W*30/375,}} source={require('../../image/home/icon.png')}/>
+						<Image style={{width:BaseComponent.W*15/375,height:BaseComponent.W*15/375}} source={require('../../image/home/add.png')}/>
+						<Text style={{fontSize:BaseComponent.W*12/375,color:'white'}}>关注</Text>
+					</View>
+
+					<View style={{width:BaseComponent.W*30/375,height:'100%',justifyContent:'center',alignItems:'center',marginLeft:BaseComponent.W*10/375}}>
+						<Image style={{width:BaseComponent.W*20/375,height:BaseComponent.W*20/375}} source={require('../../image/home/share.png')}/>
 					</View>
 				</View>
 	
