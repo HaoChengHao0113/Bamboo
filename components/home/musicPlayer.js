@@ -58,7 +58,10 @@ export default class musicPlayer extends BaseComponent{
 						<Image style={{width:BaseComponent.W*20/375,height:BaseComponent.W*20/375}} source={require('../../image/home/share.png')}/>
 					</View>
 				</View>
-	
+				
+				<View style={{width:BaseComponent.W,height:BaseComponent.W*80/375,backgroundColor:'red',flexDirection:'row',justifyContent:'center',alignItems:'center'}}>
+					<Image style={{width:BaseComponent.W*50/375,height:'100%',}} source={require('../../image/home/ic_needle.png')} resizeMode="contain"/>
+				</View>
 			</View>
 		)
 	}
