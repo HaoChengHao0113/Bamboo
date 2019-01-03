@@ -59,9 +59,12 @@ export default class musicPlayer extends BaseComponent{
 					</View>
 				</View>
 				
-				<View style={{width:BaseComponent.W,height:BaseComponent.W*80/375,backgroundColor:'red',flexDirection:'row',justifyContent:'center',alignItems:'center'}}>
-					<Image style={{width:BaseComponent.W*50/375,height:'100%',}} source={require('../../image/home/ic_needle.png')} resizeMode="contain"/>
-				</View>
+				{/*唱针和唱盘和下载，收藏区域*/}
+				<View style={{width:BaseComponent.W,height:BaseComponent.W*400/375,backgroundColor:'blue'}}>
+					<View style={{width:BaseComponent.W,height:BaseComponent.W*80/375,flexDirection:'row',justifyContent:'center',alignItems:'center'}}>
+						<Image style={{marginLeft:BaseComponent.W*15/375,marginTop:-BaseComponent.W*10/375,width:BaseComponent.W*50/375,height:'100%', transform:[{rotate:'340deg'}]}} source={require('../../image/home/ic_needle.png')} resizeMode="cover"/>
+					</View>
+				</View>	
 			</View>
 		)
 	}
