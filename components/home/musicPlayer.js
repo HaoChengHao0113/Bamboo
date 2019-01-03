@@ -5,7 +5,7 @@
  * @desc 音乐播放界面
  */
 import React,{Component} from 'react';
-import {View,Text,Image,StatusBar,StyleSheet,Dimensions,Platform,TextInput,SectionList,FlatList,ScrollView,TouchableOpacity,Animated} from 'react-native';
+import {View,Text,Image,StatusBar,StyleSheet,Dimensions,Platform,TextInput,SectionList,FlatList,ScrollView,TouchableOpacity,Animated,TouchableWithoutFeedback} from 'react-native';
 
 
 import BaseComponent from '../../Tool/BaseComponent';
@@ -16,13 +16,26 @@ export default class musicPlayer extends BaseComponent{
 	constructor(props){
 		super(props);
 		this.state={
-			
+			rotateValue: new Animated.Value(340),
 		}
 	}
 			
 	componentDidMount(){
-		let thiz = this;	
+		let thiz = this;
+		thiz.needleAnimated();	
 	};
+
+	//唱针动画
+	needleAnimated=()=>{
+		let thiz = this;
+		setTimeout(function(){
+				Animated.timing(thiz.state.rotateValue,{
+				toValue:360,
+				duration:1000
+			}).start();
+		},2000);
+		
+	}
 
 	//渲染界面
 	render(){
@@ -60,11 +73,17 @@ export default class musicPlayer extends BaseComponent{
 				</View>
 				
 				{/*唱针和唱盘和下载，收藏区域*/}
-				<View style={{width:BaseComponent.W,height:BaseComponent.W*400/375,backgroundColor:'blue'}}>
-					<View style={{width:BaseComponent.W,height:BaseComponent.W*80/375,flexDirection:'row',justifyContent:'center',alignItems:'center'}}>
-						<Image style={{marginLeft:BaseComponent.W*15/375,marginTop:-BaseComponent.W*10/375,width:BaseComponent.W*50/375,height:'100%', transform:[{rotate:'340deg'}]}} source={require('../../image/home/ic_needle.png')} resizeMode="cover"/>
+				<TouchableWithoutFeedback onPress={()=>{
+
+				}}>
+					<View style={{width:BaseComponent.W,height:BaseComponent.W*400/375,backgroundColor:'blue'}} onResponderRelease={(event)=>{
+						thiz.log("--------------------event--------------------",event);
+					}}>
+						<View style={{width:BaseComponent.W,height:BaseComponent.W*80/375,flexDirection:'row',justifyContent:'center',alignItems:'center'}}>
+							<Animated.Image style={{marginLeft:BaseComponent.W*15/375,marginTop:-BaseComponent.W*10/375,width:BaseComponent.W*50/375,height:'100%', transform:[{rotate:thiz.state.rotateValue.interpolate({inputRange: [340, 360],outputRange: ['340deg', '360deg']})}]}} source={require('../../image/home/ic_needle.png')} resizeMode="cover"/>
+						</View>
 					</View>
-				</View>	
+				</TouchableWithoutFeedback>	
 			</View>
 		)
 	}
