@@ -11,7 +11,6 @@ import Guide from './components/common/Guide';
 import musicLists from './components/home/musicLists';
 import musicPlayer from './components/home/musicPlayer';
 
-
 import {createBottomTabNavigator,createStackNavigator} from 'react-navigation';
 console.disableYellowBox = true;
 const Tab=createBottomTabNavigator(
