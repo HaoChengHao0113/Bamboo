@@ -22,7 +22,7 @@ export default class musicPlayer extends BaseComponent{
 			
 	componentDidMount(){
 		let thiz = this;
-		thiz.needleAnimated();	
+		
 	};
 
 	//唱针动画
@@ -34,7 +34,11 @@ export default class musicPlayer extends BaseComponent{
 				duration:1000
 			}).start();
 		},2000);
-		
+	}
+
+	//歌手图片旋转动画
+	rotating=()=>{
+		let thiz = this;
 	}
 
 	//渲染界面
@@ -77,7 +81,11 @@ export default class musicPlayer extends BaseComponent{
 						console.log("----------------------------event--------------------------------",event.nativeEvent);
 				}}>
 					<View style={{width:BaseComponent.W,height:BaseComponent.W*80/375,flexDirection:'row',justifyContent:'center',alignItems:'center'}}>
-						<Animated.Image style={{marginLeft:BaseComponent.W*15/375,marginTop:-BaseComponent.W*10/375,width:BaseComponent.W*50/375,height:'100%', transform:[{rotate:thiz.state.rotateValue.interpolate({inputRange: [340, 360],outputRange: ['340deg', '360deg']})}]}} source={require('../../image/home/ic_needle.png')} resizeMode="cover"/>
+						<Animated.Image style={{marginLeft:BaseComponent.W*15/375,marginTop:-BaseComponent.W*10/375,width:BaseComponent.W*60/375,height:BaseComponent.W*80/375, transform:[{rotate:thiz.state.rotateValue.interpolate({inputRange: [340, 360],outputRange: ['340deg', '360deg']})}]}} source={require('../../image/home/ic_needle.png')} resizeMode="stretch"/>
+					</View>
+					
+					<View style={{width:BaseComponent.W,height:BaseComponent.W*230/375,backgroundColor:'red',flexDirection:'row',justifyContent:'center',alignItems:'center'}}>
+						<View style={{width:BaseComponent.W*320/375,height:BaseComponent.W*230/375,backgroundColor:'yellow',borderRadius:BaseComponent.W*115/375,}}></View>
 					</View>
 				</View>	
 			</View>
