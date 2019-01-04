@@ -10,9 +10,16 @@ import Account from './components/account/account';
 import Guide from './components/common/Guide';
 import musicLists from './components/home/musicLists';
 import musicPlayer from './components/home/musicPlayer';
+import BaseComponent from './Tool/BaseComponent';
+import Tool from './Tool/Tool';
 
 import {createBottomTabNavigator,createStackNavigator} from 'react-navigation';
 console.disableYellowBox = true;
+
+
+Tool.getInstance().log("111111111111111111111111111111",BaseComponent.APP_ID);
+
+
 const Tab=createBottomTabNavigator(
     {
         Home:{
