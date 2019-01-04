@@ -85,7 +85,10 @@ export default class musicPlayer extends BaseComponent{
 					</View>
 					
 					<View style={{width:BaseComponent.W,height:BaseComponent.W*230/375,backgroundColor:'red',flexDirection:'row',justifyContent:'center',alignItems:'center'}}>
-						<View style={{width:BaseComponent.W*320/375,height:BaseComponent.W*230/375,backgroundColor:'yellow',borderRadius:BaseComponent.W*115/375,}}></View>
+						<View style={{width:BaseComponent.W*230/375,height:BaseComponent.W*230/375,backgroundColor:'yellow',borderRadius:BaseComponent.W*115/375,borderColor:'black'}}>
+							<View style={{width:BaseComponent.W*210/375,height:BaseComponent.W*210/375,borderRadius:BaseComponent.W*105/375,backgroundColor:'green'}}>
+							</View>
+						</View>
 					</View>
 				</View>	
 			</View>
