@@ -17,6 +17,7 @@ export default class musicPlayer extends BaseComponent{
 		super(props);
 		this.state={
 			rotateValue: new Animated.Value(340),
+			picRotateValue:new Animated.Value(0),
 		}
 	}
 			
@@ -39,12 +40,16 @@ export default class musicPlayer extends BaseComponent{
 	//歌手图片旋转动画
 	rotating=()=>{
 		let thiz = this;
+		Animated.timing(thiz.state.picRotateValue,{
+				toValue:360,
+				duration:10000
+			}).start();
 	}
 
 	//渲染界面
 	render(){
 		let thiz = this;
-		
+		thiz.rotating();
 		return (
 			<View style={{flex:1,backgroundColor:'#9e9e9e'}}>
 				{/*顶部导航栏*/}
@@ -86,10 +91,8 @@ export default class musicPlayer extends BaseComponent{
 					
 					<View style={{width:BaseComponent.W,height:BaseComponent.W*230/375,backgroundColor:'red',flexDirection:'row',justifyContent:'center',alignItems:'center'}}>
 						<View style={{width:BaseComponent.W*230/375,height:BaseComponent.W*230/375,backgroundColor:'yellow',borderRadius:BaseComponent.W*115/375,borderColor:'black',justifyContent:'center',alignItems:'center'}}>
-							<View style={{width:BaseComponent.W*210/375,height:BaseComponent.W*210/375,borderRadius:BaseComponent.W*105/375,backgroundColor:'green'}}>
-								<View style={{width:BaseComponent.W*180/375,height:BaseComponent.W*180/375,borderRadius:BaseComponent.W*90/375,backgroundColor:'white'}}>
-									
-								</View>
+							<View style={{width:BaseComponent.W*210/375,height:BaseComponent.W*210/375,borderRadius:BaseComponent.W*105/375,backgroundColor:'green',justifyContent:'center',alignItems:'center'}}>
+								<Animated.Image style={{width:BaseComponent.W*180/375,height:BaseComponent.W*180/375,borderRadius:BaseComponent.W*90/375,transform:[{rotate:thiz.state.picRotateValue.interpolate({inputRange: [0, 360],outputRange: ['0deg', '360deg']})}]}} source={require('../../image/home/pic1.jpg')}/>
 							</View>
 						</View>
 					</View>
