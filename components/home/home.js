@@ -41,11 +41,42 @@ export default class Home extends BaseComponent{
 		};
 		console.log("------------------------------constructor---------------------------");
 	}
-	ComponmentWillMount(){
+	componentWillMount(){
 		console.log("-------------------------ComponmentWillMount------------------------");
+
 	}
-	ComponmentDidMount(){
+	componentDidMount(){
 		console.log("-----------------------ComponmentDidMount----------------------------");
+		fetch("http://tingapi.ting.baidu.com/v1/restserver/ting?method=baidu.ting.song.play&songid=877578",{
+			method:'GET',
+			headers:{
+				User-Agent:"Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36"
+			}
+		})
+		 .then((response) => { 
+		 //请求成功后返回的对象response 
+		 //例如：json、text等 
+			this.log("----------------------response----------------------------",response);
+			return response;
+		 }) 
+		 .then((responseData) => { 
+		 //处理请求得到的数据 
+		 console.log("----------------------responseData------------------------",responseData);
+		 }) 
+		 .catch((error) => { 
+		 //网络请求失败执行该回调函数，得到错误信息 
+		 console.log("--------------------error--------------------",error);
+		 }) 
+		// let url = "http://tingapi.ting.baidu.com/v1/restserver/ting?method=baidu.ting.song.play&songid=877578";
+		// var request = new XMLHttpRequest();
+
+		// request.onreadystatechange = e => {
+		//  	this.log("----------------------e------------------------",e);
+		// };
+
+		// request.open("GET",url);
+		// request.setRequestHeader("User-Agent","Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36")
+		// request.send();
 	}
 	//轮播图
 	getBanner(data){
