@@ -732,6 +732,42 @@ export default class BaseComponent extends Component{
 		
 	}
 
+	/**
+	 * @method fetch
+	 * @params callback->回调函数,url->请求地址
+	 * @return
+	 * @desc 网络请求
+	 */
+	 fetch(url,callback){	
+	 	if(url){
+	 		fetch(url,{
+			method:'GET',
+			headers:{
+				"User-Agent":"Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36"
+			}
+			})
+			 .then((response) => { 
+			 //请求成功后返回的对象response 
+			 //例如：json、text等 
+				return response.json();
+			 }) 
+			 .then((responseData) => { 
+			 //处理请求得到的数据 
+				 this.log("----------------------responseData------------------------",responseData);
+				 if(callback){
+				 	callback(responseData);
+				 }
+			 }) 
+			 .catch((error) => { 
+			 //网络请求失败执行该回调函数，得到错误信息 
+			 console.log("--------------------error--------------------",error);
+				 if(callback){
+					 	callback(error);
+					}
+			 }) 
+	 	}
+	 }
+
 	componentWillUnmount(){
 		let thiz = this;
 		// 清除消息监听器
