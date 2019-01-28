@@ -40,10 +40,13 @@ export default class musicPlayer extends BaseComponent{
 	//歌手图片旋转动画
 	rotating=()=>{
 		let thiz = this;
+		this.state.picRotateValue.setValue(0);
 		Animated.timing(thiz.state.picRotateValue,{
 				toValue:360,
 				duration:10000
-			}).start();
+			}).start(()=>{
+				thiz.rotating();
+			});
 	}
 
 	//渲染界面

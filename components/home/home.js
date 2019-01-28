@@ -47,7 +47,7 @@ export default class Home extends BaseComponent{
 	}
 	componentDidMount(){
 		console.log("-----------------------ComponmentDidMount----------------------------");
-		this.fetch("http://tingapi.ting.baidu.com/v1/restserver/ting?method=baidu.ting.song.play&songid=877578",function(ret){
+		this.fetch("http://tingapi.ting.baidu.com/v1/restserver/ting?method=baidu.ting.billboard.billList&type=1&size=20&offset=0",function(ret){
 			console.log("--------------------------------------ret--------------------------",ret);
 		});
 		// let url = "http://tingapi.ting.baidu.com/v1/restserver/ting?method=baidu.ting.song.play&songid=877578";
