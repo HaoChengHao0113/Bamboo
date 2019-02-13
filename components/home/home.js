@@ -15,7 +15,7 @@ let W=Dimensions.get('window').width;
 let H=Dimensions.get('window').height;
 let BannerData=[require('../../image/home/Banner1.jpg'),require('../../image/home/Banner2.jpg'),require('../../image/home/Banner3.jpg')
 			   ,require('../../image/home/Banner4.jpg'),require('../../image/home/Banner5.jpg')]
-let Songlist=[{key:'推荐歌单',data:[{name:'aaa',img:require('../../image/home/pic4.jpg')},
+let Songlist1=[{key:'推荐歌单',data:[{name:'aaa',img:require('../../image/home/pic4.jpg')},
 			 {name:'aaa1',img:require('../../image/home/pic5.jpg')},
 			 {name:'aaa2',img:require('../../image/home/pic6.jpg')},
 			 {name:'aaa3',img:require('../../image/home/pic7.jpg')},
@@ -38,6 +38,7 @@ export default class Home extends BaseComponent{
 		super(props);
 		this.state={
 			seconds:0,
+			data:[],//歌曲数据源
 		};
 		console.log("------------------------------constructor---------------------------");
 	}
@@ -46,10 +47,31 @@ export default class Home extends BaseComponent{
 
 	}
 	componentDidMount(){
+		let thiz = this;
 		console.log("-----------------------ComponmentDidMount----------------------------");
+		let Songlist=[];
 		this.fetch("http://tingapi.ting.baidu.com/v1/restserver/ting?method=baidu.ting.billboard.billList&type=1&size=20&offset=0",function(ret){
 			console.log("--------------------------------------ret--------------------------",ret);
+			
+			let newSongs={};
+			newSongs.key=ret.billboard.name;
+			newSongs.data=[];
+			for(var i=0;i<ret.song_list.length;i++){
+				newSongs.data.push(ret.song_list[i]);
+			}
+			Songlist.push(newSongs);
 		});
+		this.fetch("http://tingapi.ting.baidu.com/v1/restserver/ting?method=baidu.ting.billboard.billList&type=2&size=20&offset=0",function(ret1){
+			console.log("--------------------------------------ret1--------------------------",ret1);
+			var hotSongs={};
+			hotSongs.key=ret1.billboard.name;
+			hotSongs.data=[];
+			for(var i=0;i<ret1.song_list.length;i++){
+				hotSongs.data.push(ret1.song_list[i]);
+			}
+			Songlist.push(hotSongs);
+			thiz.setState({data:Songlist});
+		})
 		// let url = "http://tingapi.ting.baidu.com/v1/restserver/ting?method=baidu.ting.song.play&songid=877578";
 		// var request = new XMLHttpRequest();
 
@@ -157,7 +179,7 @@ export default class Home extends BaseComponent{
 				
 					{/*循环列表*/}
 					<SectionList
-						sections={Songlist}
+						sections={thiz.state.data}
 						renderSectionHeader={this.sectionHeader}
 		          		renderItem={this.renderItem}
 		                keyExtractor={this.keyExtractor}
@@ -185,6 +207,7 @@ export default class Home extends BaseComponent{
 	renderItem=(info)=>{
 		//列表内容
 		let thiz = this;
+		this.log("----------------info-----------------------",info);
 		return (
 			info.index==info.section.data.length-1?(<View>
 			<View>
@@ -197,12 +220,13 @@ export default class Home extends BaseComponent{
 						return (
 							<TouchableWithoutFeedback onPress={()=>{
 								thiz.log("--------------------------info--------------------------",info);
-								thiz.navigate("musicLists",{info:info});
+								// thiz.navigate("musicLists",{info:info});
+								thiz.navigate("musicPlayer",{info:info});
 							}}>	
 								<View style={{width:(W-W*40/375)/3,height:W*100/375,marginLeft:W*10/375,marginTop:W*10/375}}>
-									<Image style={{width:'100%',height:W*80/375}} source={info.item.img} resizeMode="cover"></Image>
+									<Image style={{width:'100%',height:W*80/375}} source={{uri:info.item.pic_big}} resizeMode="cover"></Image>
 									<View style={{width:'100%',height:W*20/375}}>
-										<Text>{info.item.name}</Text>
+										<Text style={{textAlign:'center'}}>{info.item.title}</Text>
 									</View>
 								</View>
 							</TouchableWithoutFeedback>

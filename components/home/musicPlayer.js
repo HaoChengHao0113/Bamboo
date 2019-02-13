@@ -42,7 +42,7 @@ export default class musicPlayer extends BaseComponent{
 		let thiz = this;
 		this.state.picRotateValue.setValue(0);
 		Animated.timing(thiz.state.picRotateValue,{
-				toValue:360,
+				toValue:1,
 				duration:10000
 			}).start(()=>{
 				thiz.rotating();
@@ -95,7 +95,7 @@ export default class musicPlayer extends BaseComponent{
 					<View style={{width:BaseComponent.W,height:BaseComponent.W*230/375,backgroundColor:'red',flexDirection:'row',justifyContent:'center',alignItems:'center'}}>
 						<View style={{width:BaseComponent.W*230/375,height:BaseComponent.W*230/375,backgroundColor:'yellow',borderRadius:BaseComponent.W*115/375,borderColor:'black',justifyContent:'center',alignItems:'center'}}>
 							<View style={{width:BaseComponent.W*210/375,height:BaseComponent.W*210/375,borderRadius:BaseComponent.W*105/375,backgroundColor:'green',justifyContent:'center',alignItems:'center'}}>
-								<Animated.Image style={{width:BaseComponent.W*180/375,height:BaseComponent.W*180/375,borderRadius:BaseComponent.W*90/375,transform:[{rotate:thiz.state.picRotateValue.interpolate({inputRange: [0, 360],outputRange: ['0deg', '360deg']})}]}} source={require('../../image/home/pic1.jpg')}/>
+								<Animated.Image style={{width:BaseComponent.W*180/375,height:BaseComponent.W*180/375,borderRadius:BaseComponent.W*90/375,transform:[{rotate:thiz.state.picRotateValue.interpolate({inputRange: [0, 1],outputRange: ['0deg', '360deg']})}]}} source={require('../../image/home/pic1.jpg')}/>
 							</View>
 						</View>
 					</View>

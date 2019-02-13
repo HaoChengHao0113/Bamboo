@@ -753,7 +753,7 @@ export default class BaseComponent extends Component{
 			 }) 
 			 .then((responseData) => { 
 			 //处理请求得到的数据 
-				 this.log("----------------------responseData------------------------",responseData);
+				 // this.log("----------------------responseData------------------------",responseData);
 				 if(callback){
 				 	callback(responseData);
 				 }
