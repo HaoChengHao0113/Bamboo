@@ -3,6 +3,7 @@ package com.bamboo;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.brentvatne.react.ReactVideoPackage;
 import com.toast.RCTToastPackage;
 import com.RNFetchBlob.RNFetchBlobPackage;
 
@@ -29,6 +30,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new ReactVideoPackage(),
             
             new RNFetchBlobPackage(),
             new RCTToastPackage(),

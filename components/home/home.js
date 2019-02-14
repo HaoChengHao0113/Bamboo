@@ -50,7 +50,7 @@ export default class Home extends BaseComponent{
 		let thiz = this;
 		console.log("-----------------------ComponmentDidMount----------------------------");
 		let Songlist=[];
-		this.fetch("http://tingapi.ting.baidu.com/v1/restserver/ting?method=baidu.ting.billboard.billList&type=1&size=20&offset=0",function(ret){
+		thiz.fetch("http://tingapi.ting.baidu.com/v1/restserver/ting?method=baidu.ting.billboard.billList&type=1&size=20&offset=0",function(ret){
 			console.log("--------------------------------------ret--------------------------",ret);
 			
 			let newSongs={};
@@ -60,18 +60,24 @@ export default class Home extends BaseComponent{
 				newSongs.data.push(ret.song_list[i]);
 			}
 			Songlist.push(newSongs);
+			
+			setTimeout(function(){
+				console.log("---------------------------------------------------------","开始请求热歌榜")
+				thiz.fetch("http://tingapi.ting.baidu.com/v1/restserver/ting?method=baidu.ting.billboard.billList&type=2&size=20&offset=0",function(ret1){
+				console.log("--------------------------------------ret1--------------------------",ret1);
+				var hotSongs={};
+				hotSongs.key=ret1.billboard.name;
+				hotSongs.data=[];
+				for(var i=0;i<ret1.song_list.length;i++){
+					hotSongs.data.push(ret1.song_list[i]);
+				}
+				Songlist.push(hotSongs);
+				thiz.setState({data:Songlist});
+			})
+			},200)
+			
 		});
-		this.fetch("http://tingapi.ting.baidu.com/v1/restserver/ting?method=baidu.ting.billboard.billList&type=2&size=20&offset=0",function(ret1){
-			console.log("--------------------------------------ret1--------------------------",ret1);
-			var hotSongs={};
-			hotSongs.key=ret1.billboard.name;
-			hotSongs.data=[];
-			for(var i=0;i<ret1.song_list.length;i++){
-				hotSongs.data.push(ret1.song_list[i]);
-			}
-			Songlist.push(hotSongs);
-			thiz.setState({data:Songlist});
-		})
+		
 		// let url = "http://tingapi.ting.baidu.com/v1/restserver/ting?method=baidu.ting.song.play&songid=877578";
 		// var request = new XMLHttpRequest();
 
@@ -96,7 +102,6 @@ export default class Home extends BaseComponent{
 	//渲染界面
 	render(){
 		let thiz = this;
-		console.log("----------------------render-------------");
 		return (
 		<View style={{flex:1,backgroundColor:'#fff'}}>
 			<View style={{width:W,backgroundColor:'#d84236'}}>
@@ -207,7 +212,7 @@ export default class Home extends BaseComponent{
 	renderItem=(info)=>{
 		//列表内容
 		let thiz = this;
-		this.log("----------------info-----------------------",info);
+
 		return (
 			info.index==info.section.data.length-1?(<View>
 			<View>

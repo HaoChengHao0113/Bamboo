@@ -9,6 +9,7 @@ import {Slider,View,Text,Image,StatusBar,StyleSheet,Dimensions,Platform,TextInpu
 
 
 import BaseComponent from '../../Tool/BaseComponent';
+import Video from 'react-native-video';
 
 
 export default class musicPlayer extends BaseComponent{
@@ -18,12 +19,18 @@ export default class musicPlayer extends BaseComponent{
 		this.state={
 			rotateValue: new Animated.Value(340),
 			picRotateValue:new Animated.Value(0),
+			paused:false,//控制歌曲播放暂停
+			totalTime:"00:00:00",//播放总时长
+			currentTime:"00:00:00",//当前时间
+			totalSecond:0,//视频总共多少秒
+            currentSecond:0,//当前秒数
 		}
 	}
 			
 	componentDidMount(){
 		let thiz = this;
-		
+		var info = thiz.params.info;
+		thiz.log("---------------info------------------",info);
 	};
 
 	//唱针动画
@@ -49,10 +56,51 @@ export default class musicPlayer extends BaseComponent{
 			});
 	}
 
+	//播放过程
+	onProgress=(time)=>{
+		let thiz = this;
+		var hour=parseInt(parseInt(time.currentTime)/3600);
+            var minute=parseInt((parseInt(time.currentTime)-hour*3600)/60);
+            var second=parseInt(time.currentTime)-hour*3600-minute*60;
+            if(hour<10){
+                  hour="0"+hour;
+            }
+            if(minute<10){
+                  minute="0"+minute;
+            }
+            if(second<10){
+                  second="0"+second
+            }
+        var currentTime=hour+":"+minute+":"+second;
+        this.setState({currentTime:currentTime,currentSecond:parseInt(time.currentTime)});
+	}
+
+	//加载音乐
+	onLoad=(allTime)=>{
+		let thiz = this;
+		thiz.rotating();
+		thiz.log("------------------------------allTime--------------------------------",allTime);
+		var time=parseInt(allTime.duration);
+            var hour=parseInt(time/3600);
+            var minute=parseInt((time-hour*3600)/60);
+            var second=time-hour*3600-minute*60;
+            if(hour<10){
+                  hour="0"+hour;
+            }
+            if(minute<10){
+                  minute="0"+minute;
+            }
+            if(second<10){
+                  second="0"+second
+            }
+            var totalTime=hour+":"+minute+":"+second;
+
+            this.setState({totalTime:totalTime,totalSecond:time});
+	}
+
 	//渲染界面
 	render(){
 		let thiz = this;
-		// thiz.rotating();
 		return (
 			<View style={{flex:1,backgroundColor:'#9e9e9e'}}>
 				{/*顶部导航栏*/}
@@ -111,26 +159,33 @@ export default class musicPlayer extends BaseComponent{
 				
 				{/*播放进度条*/}
 				<View style={{width:'100%',flexDirection:'row',alignItems:'center'}}>
-					<Text style={{marginLeft:BaseComponent.W*10/375}}>00:45</Text>
-					<Slider style={{width:'75%'}}
+					<Text style={{marginLeft:BaseComponent.W*10/375}}>{thiz.state.currentTime}</Text>
+					<Slider style={{width:'65%'}}
                           minimumValue={0}
-                          maximumValue={100}
+                          maximumValue={thiz.state.totalSecond}
                           maximumTrackTintColor="white"
-                          value={50}
+                          value={thiz.state.currentSecond}
                           onSlidingComplete={(index)=>{
-                                // thiz.refs.player.seek(index);
+                                thiz.refs.player.seek(index);
                           }}
                     />  
-                    <Text>00:45</Text>  
+                    <Text>{thiz.state.totalTime}</Text>  
 				</View>
+
+				{/*音乐播放*/}
+				<Video source={{uri: "http://zhangmenshiting.qianqian.com/data2/music/3519cdb70c14a95076e8c006c7226963/599516462/599516462.mp3?xcode=4a33ef1045b3e43c86c86b4d2d72cc37"}}
+                    ref='player' 
+                    paused={thiz.state.paused}
+                    onProgress={this.onProgress}
+                    onLoad={this.onLoad}/>
 
 				{/*上一曲，下一曲，播放，暂停*/}
 				<View style={{width:'100%',flexDirection:'row',alignItems:'center',marginTop:BaseComponent.W*40/375}}>
-					<Image style={{width:BaseComponent.W*33/375,height:BaseComponent.W*33/375,marginLeft:BaseComponent.W*10/375}} source={require('../../image/home/favorite.png')}></Image>
-					<Image style={{width:BaseComponent.W*33/375,height:BaseComponent.W*33/375,marginLeft:BaseComponent.W*47/375}} source={require('../../image/home/favorite.png')}></Image>
-					<Image style={{width:BaseComponent.W*33/375,height:BaseComponent.W*33/375,marginLeft:BaseComponent.W*47/375}} source={require('../../image/home/favorite.png')}></Image>
-					<Image style={{width:BaseComponent.W*33/375,height:BaseComponent.W*33/375,marginLeft:BaseComponent.W*47/375}} source={require('../../image/home/favorite.png')}></Image>
-					<Image style={{width:BaseComponent.W*33/375,height:BaseComponent.W*33/375,marginLeft:BaseComponent.W*47/375}} source={require('../../image/home/favorite.png')}></Image>
+					<Image style={{width:BaseComponent.W*28/375,height:BaseComponent.W*28/375,marginLeft:BaseComponent.W*20/375}} source={require('../../image/home/random.png')}></Image>
+					<Image style={{width:BaseComponent.W*33/375,height:BaseComponent.W*33/375,marginLeft:BaseComponent.W*52/375}} source={require('../../image/home/pre.png')}></Image>
+					<Image style={{width:BaseComponent.W*33/375,height:BaseComponent.W*33/375,marginLeft:BaseComponent.W*40/375}} source={require('../../image/home/stop.png')}></Image>
+					<Image style={{width:BaseComponent.W*33/375,height:BaseComponent.W*33/375,marginLeft:BaseComponent.W*40/375}} source={require('../../image/home/next.png')}></Image>
+					<Image style={{width:BaseComponent.W*28/375,height:BaseComponent.W*28/375,marginLeft:BaseComponent.W*40/375}} source={require('../../image/home/gedan.png')}></Image>
 				</View>
 			</View>
 		)
