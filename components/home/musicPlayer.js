@@ -24,6 +24,7 @@ export default class musicPlayer extends BaseComponent{
 			currentTime:"00:00:00",//当前时间
 			totalSecond:0,//视频总共多少秒
             currentSecond:0,//当前秒数
+            playAnimated:false,//判断旋转动画是否开始,true表示开始
 		}
 	}
 			
@@ -47,13 +48,28 @@ export default class musicPlayer extends BaseComponent{
 	//歌手图片旋转动画
 	rotating=()=>{
 		let thiz = this;
-		this.state.picRotateValue.setValue(0);
-		Animated.timing(thiz.state.picRotateValue,{
+		// this.state.picRotateValue.setValue(0);
+		// Animated.timing(thiz.state.picRotateValue,{
+		// 		toValue:1,
+		// 		duration:20000
+		// 	}).start(()=>{
+		// 		thiz.rotating();
+		// 	});
+
+		let animated=Animated.timing(thiz.state.picRotateValue,{
 				toValue:1,
 				duration:20000
-			}).start(()=>{
-				thiz.rotating();
 			});
+		//开始动画
+		if(thiz.state.playAnimated){
+			this.state.picRotateValue.setValue(0);
+			animated.start(()=>{
+				thiz.rotating();
+			})
+		}else{
+			//停止动画
+			animated.stop();
+		}
 	}
 
 	//播放过程
@@ -183,7 +199,16 @@ export default class musicPlayer extends BaseComponent{
 				<View style={{width:'100%',flexDirection:'row',alignItems:'center',marginTop:BaseComponent.W*40/375}}>
 					<Image style={{width:BaseComponent.W*28/375,height:BaseComponent.W*28/375,marginLeft:BaseComponent.W*20/375}} source={require('../../image/home/random.png')}></Image>
 					<Image style={{width:BaseComponent.W*33/375,height:BaseComponent.W*33/375,marginLeft:BaseComponent.W*52/375}} source={require('../../image/home/pre.png')}></Image>
-					<Image style={{width:BaseComponent.W*33/375,height:BaseComponent.W*33/375,marginLeft:BaseComponent.W*40/375}} source={require('../../image/home/stop.png')}></Image>
+					
+					<TouchableWithoutFeedback onPress={()=>{
+						thiz.setState({
+							playAnimated:!thiz.state.playAnimated,
+							paused:!thiz.state.paused
+						});
+					}}>
+						<Image style={{width:BaseComponent.W*33/375,height:BaseComponent.W*33/375,marginLeft:BaseComponent.W*40/375}} source={thiz.state.playAnimated?require('../../image/home/stop.png'):require('../../image/home/play.png')}></Image>
+					</TouchableWithoutFeedback>
+
 					<Image style={{width:BaseComponent.W*33/375,height:BaseComponent.W*33/375,marginLeft:BaseComponent.W*40/375}} source={require('../../image/home/next.png')}></Image>
 					<Image style={{width:BaseComponent.W*28/375,height:BaseComponent.W*28/375,marginLeft:BaseComponent.W*40/375}} source={require('../../image/home/gedan.png')}></Image>
 				</View>
