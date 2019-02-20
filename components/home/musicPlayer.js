@@ -24,7 +24,7 @@ export default class musicPlayer extends BaseComponent{
 			currentTime:"00:00:00",//当前时间
 			totalSecond:0,//视频总共多少秒
             currentSecond:0,//当前秒数
-            playAnimated:false,//判断旋转动画是否开始,true表示开始
+            playAnimated:true,//判断旋转动画是否开始,true表示开始
 		}
 	}
 			
@@ -189,7 +189,7 @@ export default class musicPlayer extends BaseComponent{
 				</View>
 
 				{/*音乐播放*/}
-				<Video source={{uri: "http://zhangmenshiting.qianqian.com/data2/music/3519cdb70c14a95076e8c006c7226963/599516462/599516462.mp3?xcode=4a33ef1045b3e43c86c86b4d2d72cc37"}}
+				<Video source={{uri: "http://zhangmenshiting.qianqian.com/data2/music/3519cdb70c14a95076e8c006c7226963/599516462/599516462.mp3?xcode=03550f8926118a9c554bf4edd997f8d2"}}
                     ref='player' 
                     paused={thiz.state.paused}
                     onProgress={this.onProgress}
