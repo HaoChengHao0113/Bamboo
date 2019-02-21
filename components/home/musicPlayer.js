@@ -5,7 +5,7 @@
  * @desc 音乐播放界面
  */
 import React,{Component} from 'react';
-import {Slider,View,Text,Image,StatusBar,StyleSheet,Dimensions,Platform,TextInput,SectionList,FlatList,ScrollView,TouchableOpacity,Animated,TouchableWithoutFeedback} from 'react-native';
+import {Easing,Slider,View,Text,Image,StatusBar,StyleSheet,Dimensions,Platform,TextInput,SectionList,FlatList,ScrollView,TouchableOpacity,Animated,TouchableWithoutFeedback} from 'react-native';
 
 
 import BaseComponent from '../../Tool/BaseComponent';
@@ -26,6 +26,13 @@ export default class musicPlayer extends BaseComponent{
             currentSecond:0,//当前秒数
             playAnimated:true,//判断旋转动画是否开始,true表示开始
 		}
+		this.isPause = false;
+		this.mAnimate = Animated.timing(this.state.picRotateValue, {
+			toValue: 1,
+			duration: 30000,
+			easing: Easing.inOut(Easing.linear),
+		});
+
 	}
 			
 	componentDidMount(){
@@ -45,32 +52,6 @@ export default class musicPlayer extends BaseComponent{
 		},2000);
 	}
 
-	//歌手图片旋转动画
-	rotating=()=>{
-		let thiz = this;
-		// this.state.picRotateValue.setValue(0);
-		// Animated.timing(thiz.state.picRotateValue,{
-		// 		toValue:1,
-		// 		duration:20000
-		// 	}).start(()=>{
-		// 		thiz.rotating();
-		// 	});
-
-		let animated=Animated.timing(thiz.state.picRotateValue,{
-				toValue:1,
-				duration:20000
-			});
-		//开始动画
-		if(thiz.state.playAnimated){
-			this.state.picRotateValue.setValue(0);
-			animated.start(()=>{
-				thiz.rotating();
-			})
-		}else{
-			//停止动画
-			animated.stop();
-		}
-	}
 
 	//播放过程
 	onProgress=(time)=>{
@@ -94,7 +75,7 @@ export default class musicPlayer extends BaseComponent{
 	//加载音乐
 	onLoad=(allTime)=>{
 		let thiz = this;
-		thiz.rotating();
+		thiz.startAnim();
 		thiz.log("------------------------------allTime--------------------------------",allTime);
 		var time=parseInt(allTime.duration);
             var hour=parseInt(time/3600);
@@ -113,6 +94,55 @@ export default class musicPlayer extends BaseComponent{
 
             this.setState({totalTime:totalTime,totalSecond:time});
 	}
+
+	//重复动画
+	_imgStarting = () => {
+		if (this.isPause) {
+			this.state.picRotateValue.setValue(0);
+			this.mAnimate.start(() => {
+				this._imgStarting()
+			})
+		}
+	};
+ 
+	startAnim(){
+		if (this.isPause){ //避免多次点击启动多次动画出现异常.
+		    return
+	    }
+		this.isPause = true;
+		    this.setState({
+			paused:false
+	    })
+		this.mAnimate.start(() => {
+		    this.mAnimate = Animated.timing(this.state.picRotateValue, {
+				toValue: 1,
+				duration: 30000,
+				easing: Easing.inOut(Easing.linear),
+			});
+			this._imgStarting()
+		})
+	}
+
+
+	pauseAnim(){
+	    if (!this.isPause){   //避免多次点击启动多次动画出现异常.
+			return
+		}
+		this.isPause = false;
+		this.setState({
+			paused:true
+		})
+		this.state.picRotateValue.stopAnimation((oneTimeRotate) => {
+			//计算角度比例
+			this.mAnimate = Animated.timing(this.state.picRotateValue, {
+				toValue: 1,
+				duration: (1 - oneTimeRotate) * 30000,
+				easing: Easing.inOut(Easing.linear),
+			});
+		});
+	}
+
+
 
 	//渲染界面
 	render(){
@@ -205,6 +235,12 @@ export default class musicPlayer extends BaseComponent{
 							playAnimated:!thiz.state.playAnimated,
 							paused:!thiz.state.paused
 						});
+						if(thiz.isPause){
+							thiz.pauseAnim();
+						}else{
+							thiz.startAnim();
+						}
+						
 					}}>
 						<Image style={{width:BaseComponent.W*33/375,height:BaseComponent.W*33/375,marginLeft:BaseComponent.W*40/375}} source={thiz.state.playAnimated?require('../../image/home/stop.png'):require('../../image/home/play.png')}></Image>
 					</TouchableWithoutFeedback>
