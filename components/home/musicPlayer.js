@@ -35,7 +35,7 @@ export default class musicPlayer extends BaseComponent{
 			easing: Easing.inOut(Easing.linear),
 		});
 
-		this.showLrc=false,//是否显示歌词,true显示
+		this.showLrc=false;//是否显示歌词,true显示
 
 	}
 			
@@ -63,14 +63,29 @@ export default class musicPlayer extends BaseComponent{
 			thiz.showLrc=false;
 			thiz.state.lrcOpacity.setValue(1);
 			thiz.state.rotatingOpacity.setValue(0);
-			Animated.timing(thiz.state.rotatingOpacity,{
+			Animated.timing(thiz.state.lrcOpacity,{
+				toValue:0,
+				duration:1900
+			}).start();
+
+			setTimeout(function(){
+				Animated.timing(thiz.state.rotatingOpacity,{
 				toValue:1,
+				duration:2000
+			}).start();
+			},2000)
+		}else{
+			thiz.showLrc=true;
+			thiz.state.lrcOpacity.setValue(0);
+			thiz.state.rotatingOpacity.setValue(1);
+			Animated.timing(thiz.state.rotatingOpacity,{
+				toValue:0,
 				duration:1900
 			}).start();
 
 			setTimeout(function(){
 				Animated.timing(thiz.state.lrcOpacity,{
-				toValue:0,
+				toValue:1,
 				duration:2000
 			}).start();
 			},2000)
@@ -204,20 +219,24 @@ export default class musicPlayer extends BaseComponent{
 				</View>
 				
 				{/*唱针和唱盘和下载，收藏区域*/}
-				<Animated.View style={{width:BaseComponent.W,height:BaseComponent.W*400/375,opacity:thiz.state.rotatingOpacity}} onStartShouldSetResponder={()=>{return true;}} onResponderRelease={(event)=>{
+				<Animated.View style={{width:BaseComponent.W,height:BaseComponent.W*400/375,opacity:thiz.state.rotatingOpacity,display:thiz.showLrc?'none':'flex'}} onStartShouldSetResponder={()=>{return true;}} onResponderRelease={(event)=>{
 						console.log("----------------------------event--------------------------------",event.nativeEvent);
 				}}>
 					<View style={{width:BaseComponent.W,height:BaseComponent.W*80/375,flexDirection:'row',justifyContent:'center',alignItems:'center'}}>
 						<Animated.Image style={{marginLeft:BaseComponent.W*15/375,marginTop:-BaseComponent.W*10/375,width:BaseComponent.W*60/375,height:BaseComponent.W*80/375, transform:[{rotate:thiz.state.rotateValue.interpolate({inputRange: [340, 360],outputRange: ['340deg', '360deg']})}]}} source={require('../../image/home/ic_needle.png')} resizeMode="stretch"/>
 					</View>
 					
-					<View style={{width:BaseComponent.W,height:BaseComponent.W*230/375,flexDirection:'row',justifyContent:'center',alignItems:'center'}}>
-						<View style={{width:BaseComponent.W*230/375,height:BaseComponent.W*230/375,backgroundColor:'yellow',borderRadius:BaseComponent.W*115/375,borderColor:'black',justifyContent:'center',alignItems:'center'}}>
-							<View style={{width:BaseComponent.W*210/375,height:BaseComponent.W*210/375,borderRadius:BaseComponent.W*105/375,backgroundColor:'green',justifyContent:'center',alignItems:'center'}}>
-								<Animated.Image style={{width:BaseComponent.W*180/375,height:BaseComponent.W*180/375,borderRadius:BaseComponent.W*90/375,transform:[{rotate:thiz.state.picRotateValue.interpolate({inputRange: [0, 1],outputRange: ['0deg', '360deg']})}]}} source={require('../../image/home/pic1.jpg')}/>
+					<TouchableWithoutFeedback onPress={()=>{
+						thiz.changeShowLrcOrPic();
+					}}>
+						<View style={{width:BaseComponent.W,height:BaseComponent.W*230/375,flexDirection:'row',justifyContent:'center',alignItems:'center'}}>
+							<View style={{width:BaseComponent.W*230/375,height:BaseComponent.W*230/375,backgroundColor:'yellow',borderRadius:BaseComponent.W*115/375,borderColor:'black',justifyContent:'center',alignItems:'center'}}>
+								<View style={{width:BaseComponent.W*210/375,height:BaseComponent.W*210/375,borderRadius:BaseComponent.W*105/375,backgroundColor:'green',justifyContent:'center',alignItems:'center'}}>
+									<Animated.Image style={{width:BaseComponent.W*180/375,height:BaseComponent.W*180/375,borderRadius:BaseComponent.W*90/375,transform:[{rotate:thiz.state.picRotateValue.interpolate({inputRange: [0, 1],outputRange: ['0deg', '360deg']})}]}} source={require('../../image/home/pic1.jpg')}/>
+								</View>
 							</View>
 						</View>
-					</View>
+					</TouchableWithoutFeedback>	
 					
 					<View style={{width:'100%',height:BaseComponent.W*90/375,flexDirection:'row',alignItems:'center',justifyContent:'space-around'}}>
 						<Image style={{width:BaseComponent.W*30/375,height:BaseComponent.W*30/375}} source={require('../../image/home/favorite.png')}></Image>
@@ -229,9 +248,13 @@ export default class musicPlayer extends BaseComponent{
 				</Animated.View>
 
 				{/*歌词显示*/}
-				<Animated.View style={{width:BaseComponent.W,height:BaseComponent.W*400/375,backgroundColor:'red',opacity:thiz.state.lrcOpacity}}>
+				<TouchableWithoutFeedback onPress={()=>{
+					thiz.changeShowLrcOrPic();
+				}}>
+					<Animated.View style={{width:BaseComponent.W,height:BaseComponent.W*400/375,backgroundColor:'red',opacity:thiz.state.lrcOpacity,display:thiz.showLrc?'flex':'none'}}>
 
-				</Animated.View>	
+					</Animated.View>
+				</TouchableWithoutFeedback>		
 				
 				{/*播放进度条*/}
 				<View style={{width:'100%',flexDirection:'row',alignItems:'center'}}>
