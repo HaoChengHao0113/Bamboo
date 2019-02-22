@@ -36,6 +36,7 @@ export default class musicPlayer extends BaseComponent{
 		});
 
 		this.showLrc=false;//是否显示歌词,true显示
+		this.isLoading=false;//是否正在执行歌词切换动画
 
 	}
 			
@@ -59,6 +60,9 @@ export default class musicPlayer extends BaseComponent{
 	//切换歌词或唱针动画
 	changeShowLrcOrPic=()=>{
 		let thiz = this;
+		if(thiz.isLoading){
+			return ;
+		}
 		if(thiz.showLrc){
 			thiz.showLrc=false;
 			thiz.state.lrcOpacity.setValue(1);
@@ -66,13 +70,17 @@ export default class musicPlayer extends BaseComponent{
 			Animated.timing(thiz.state.lrcOpacity,{
 				toValue:0,
 				duration:1900
-			}).start();
+			}).start(()=>{
+				thiz.isLoading=true;
+			});
 
 			setTimeout(function(){
 				Animated.timing(thiz.state.rotatingOpacity,{
 				toValue:1,
 				duration:2000
-			}).start();
+			}).start(()=>{
+				thiz.isLoading=false
+			});
 			},2000)
 		}else{
 			thiz.showLrc=true;
@@ -81,13 +89,17 @@ export default class musicPlayer extends BaseComponent{
 			Animated.timing(thiz.state.rotatingOpacity,{
 				toValue:0,
 				duration:1900
-			}).start();
+			}).start(()=>{
+				thiz.isLoading=true
+			});
 
 			setTimeout(function(){
 				Animated.timing(thiz.state.lrcOpacity,{
 				toValue:1,
 				duration:2000
-			}).start();
+			}).start(()=>{
+				thiz.isLoading=false;
+			});
 			},2000)
 		}
 	}
