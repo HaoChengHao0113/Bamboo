@@ -46,7 +46,7 @@ public class ToastModule extends ReactContextBaseJavaModule {
 
   @ReactMethod
   public void requestInstallPermissions(String path,Callback successCallback,Callback errorCallback) {
-    Log.d("----------------------path-------------------------",path);
+    // Log.d("----------------------path-------------------------",path);
      try{
         if (Build.VERSION.SDK_INT >= 26) {
           boolean b = getReactApplicationContext().getPackageManager().canRequestPackageInstalls(); 
@@ -54,16 +54,16 @@ public class ToastModule extends ReactContextBaseJavaModule {
           if (b){
             String a="directly_install";
             successCallback.invoke(a);
-            Log.d("---------------------直接去安装------------------------------","directly_install");
+            // Log.d("---------------------直接去安装------------------------------","directly_install");
           }else{ 
             String a="To_open_permissions_install";
             successCallback.invoke(a);
-            Log.d("-----------------去打开安装权限开关--------------------------","To_open_permissions_install");
+            // Log.d("-----------------去打开安装权限开关--------------------------","To_open_permissions_install");
           }
         }else{
           String a="android8.0以下_install";
           successCallback.invoke(a);
-          Log.d("---------------------直接去安装啊------------------------------","android8.0以下_install");
+          // Log.d("---------------------直接去安装啊------------------------------","android8.0以下_install");
         }
      }catch(Exception e){
         errorCallback.invoke(e.getMessage());

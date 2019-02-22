@@ -108,6 +108,10 @@ android {
         }
     }
 
+    lintOptions {
+        abortOnError false
+    } 
+
     signingConfigs {
         release {
             File strFile = new File("./my-release-key.keystore")

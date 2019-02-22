@@ -25,13 +25,17 @@ export default class musicPlayer extends BaseComponent{
 			totalSecond:0,//视频总共多少秒
             currentSecond:0,//当前秒数
             playAnimated:true,//判断旋转动画是否开始,true表示开始
+            rotatingOpacity:new Animated.Value(1),//旋转动画透明度
+            lrcOpacity:new Animated.Value(0),//歌词透明度
 		}
-		this.isPause = false;
+		this.isPause = false;//是否暂停
 		this.mAnimate = Animated.timing(this.state.picRotateValue, {
 			toValue: 1,
 			duration: 30000,
 			easing: Easing.inOut(Easing.linear),
 		});
+
+		this.showLrc=false,//是否显示歌词,true显示
 
 	}
 			
@@ -50,6 +54,27 @@ export default class musicPlayer extends BaseComponent{
 				duration:1000
 			}).start();
 		},2000);
+	}
+
+	//切换歌词或唱针动画
+	changeShowLrcOrPic=()=>{
+		let thiz = this;
+		if(thiz.showLrc){
+			thiz.showLrc=false;
+			thiz.state.lrcOpacity.setValue(1);
+			thiz.state.rotatingOpacity.setValue(0);
+			Animated.timing(thiz.state.rotatingOpacity,{
+				toValue:1,
+				duration:1900
+			}).start();
+
+			setTimeout(function(){
+				Animated.timing(thiz.state.lrcOpacity,{
+				toValue:0,
+				duration:2000
+			}).start();
+			},2000)
+		}
 	}
 
 
@@ -179,7 +204,7 @@ export default class musicPlayer extends BaseComponent{
 				</View>
 				
 				{/*唱针和唱盘和下载，收藏区域*/}
-				<View style={{width:BaseComponent.W,height:BaseComponent.W*400/375}} onStartShouldSetResponder={()=>{return true;}} onResponderRelease={(event)=>{
+				<Animated.View style={{width:BaseComponent.W,height:BaseComponent.W*400/375,opacity:thiz.state.rotatingOpacity}} onStartShouldSetResponder={()=>{return true;}} onResponderRelease={(event)=>{
 						console.log("----------------------------event--------------------------------",event.nativeEvent);
 				}}>
 					<View style={{width:BaseComponent.W,height:BaseComponent.W*80/375,flexDirection:'row',justifyContent:'center',alignItems:'center'}}>
@@ -201,7 +226,12 @@ export default class musicPlayer extends BaseComponent{
 						<Image style={{width:BaseComponent.W*30/375,height:BaseComponent.W*30/375}} source={require('../../image/home/discuss.png')}></Image>
 						<Image style={{width:BaseComponent.W*40/375,height:BaseComponent.W*30/375}} source={require('../../image/home/shumore.png')}></Image>
 					</View>
-				</View>	
+				</Animated.View>
+
+				{/*歌词显示*/}
+				<Animated.View style={{width:BaseComponent.W,height:BaseComponent.W*400/375,backgroundColor:'red',opacity:thiz.state.lrcOpacity}}>
+
+				</Animated.View>	
 				
 				{/*播放进度条*/}
 				<View style={{width:'100%',flexDirection:'row',alignItems:'center'}}>

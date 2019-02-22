@@ -6,7 +6,7 @@ import com.facebook.react.ReactApplication;
 import com.brentvatne.react.ReactVideoPackage;
 import com.toast.RCTToastPackage;
 import com.RNFetchBlob.RNFetchBlobPackage;
-
+// import com.bamboo.module.SharePackage;
 
 import com.bamboo.CustomToastPackage;
 import com.facebook.react.ReactNativeHost;
@@ -31,7 +31,7 @@ public class MainApplication extends Application implements ReactApplication {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
             new ReactVideoPackage(),
-            
+            // new SharePackage(),
             new RNFetchBlobPackage(),
             new RCTToastPackage(),
             new CustomToastPackage() 
