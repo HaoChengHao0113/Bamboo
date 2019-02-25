@@ -84,3 +84,7 @@
   //访问文件系统
   npm install react-native-fs --save
   react-native link react-native-fs
+
+  //截图组件
+  npm install react-native-view-shot --save
+  react-native link react-native-view-shot

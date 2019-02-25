@@ -155,6 +155,7 @@ android {
 
 
 dependencies {
+    implementation project(':react-native-view-shot') 
     compile project(':react-native-video')
     compile project(':react-native-fetch-blob')
     compile project(':react-native-toast-native')
