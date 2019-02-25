@@ -17,8 +17,7 @@ export default class Dynamic extends BaseComponent{
 
 snapshot(){
 	console.log("11111");
-	
-	 this.refs.code.capture().then(uri => {
+	this.refs.code.capture().then(uri => {
       console.log("do something with ", uri);
       this.setState({img:uri})
     });
@@ -34,19 +33,19 @@ snapshot(){
 		let thiz = this;
 		return (
 			<ScrollView>
-			<View>
-				<TouchableWithoutFeedback onPress={()=>{
-				}}>
-					<ViewShot ref="code" style={{width:BaseComponent.W,height:400,backgroundColor:'white'}} options={{ format: "jpg", quality: 1 }}>
-						<Image style={{width:BaseComponent.W,height:400}} resizeMode="stretch" source={require('../../image/home/pic1.jpg')}/>	
-						<Image style={{width:BaseComponent.W*80/375,height:BaseComponent.W*80/375,position:'absolute',left:BaseComponent.W*145/375,top:160}} resizeMode="stretch" source={require('../../image/home/pic3.jpeg')}/>
-					</ViewShot>
-				</TouchableWithoutFeedback>	
-				<Text style={{fontSize:20}} onPress={()=>{
-					thiz.snapshot();
-				}}>点击合并为一张图片</Text>
-				<Image style={{width:200,height:200}} source={{uri:thiz.state.img}}/>
-			</View>
+				<View>
+					<TouchableWithoutFeedback onPress={()=>{
+					}}>
+						<ViewShot ref="code" style={{width:BaseComponent.W,height:400,backgroundColor:'white'}} options={{ format: "jpg", quality: 1 }}>
+							<Image style={{width:BaseComponent.W,height:400}} resizeMode="stretch" source={require('../../image/home/pic1.jpg')}/>	
+							<Image style={{width:BaseComponent.W*80/375,height:BaseComponent.W*80/375,position:'absolute',left:BaseComponent.W*145/375,top:160}} resizeMode="stretch" source={require('../../image/home/pic3.jpeg')}/>
+						</ViewShot>
+					</TouchableWithoutFeedback>	
+					<Text style={{fontSize:20}} onPress={()=>{
+						thiz.snapshot();
+					}}>点击合并为一张图片</Text>
+					<Image style={{width:200,height:200}} source={{uri:thiz.state.img}}/>
+				</View>
 			</ScrollView>
 		)
 	}

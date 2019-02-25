@@ -144,6 +144,11 @@ export default class musicPlayer extends BaseComponent{
             }
             var totalTime=hour+":"+minute+":"+second;
 
+            //获取歌词
+            thiz.fetch('http://tingapi.ting.baidu.com/v1/restserver/ting?method=baidu.ting.song.lry&songid=877578',function(ret){
+            	thiz.log('---------------Lrc-------------------'.ret);
+            })
+
             this.setState({totalTime:totalTime,totalSecond:time});
 	}
 
