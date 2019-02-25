@@ -16,19 +16,8 @@ export default class Dynamic extends BaseComponent{
 	}
 
 snapshot(){
-	// console.log("11111");
-	// captureRef(this.mainViewRef.current, {
-	//   format: "jpg",
-	//   quality: 0.8,
-	//   result: "tmpfile",
-	//   snapshotContentContainer: true
-	// })
-	// .then((uri)=>{
-	// 	console.log("Image saved to", uri)
-	// })
-	// .catch((error)=>{
-	// 	console.log("---------------error", error)
-	// })  
+	console.log("11111");
+	
 	 this.refs.code.capture().then(uri => {
       console.log("do something with ", uri);
       this.setState({img:uri})
@@ -38,7 +27,6 @@ snapshot(){
 	componentDidMount(){
 		let thiz = this;
 		var code=thiz.refs.code;
-		// thiz.snapshot();
 	}
 	
 
