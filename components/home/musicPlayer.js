@@ -77,10 +77,6 @@ export default class musicPlayer extends BaseComponent{
 				})
 			}
 		})
-		//获取歌词
-        // thiz.fetch('http://tingapi.ting.baidu.com/v1/restserver/ting?method=baidu.ting.song.lry&songid=877578',function(ret){
-        // 	thiz.log('---------------Lrc-------------------'.ret);
-        // });
 	};
 
 	//唱针动画
@@ -296,7 +292,7 @@ export default class musicPlayer extends BaseComponent{
 						<View style={{width:BaseComponent.W,height:BaseComponent.W*230/375,flexDirection:'row',justifyContent:'center',alignItems:'center'}}>
 							<View style={{width:BaseComponent.W*230/375,height:BaseComponent.W*230/375,backgroundColor:'yellow',borderRadius:BaseComponent.W*115/375,borderColor:'black',justifyContent:'center',alignItems:'center'}}>
 								<View style={{width:BaseComponent.W*210/375,height:BaseComponent.W*210/375,borderRadius:BaseComponent.W*105/375,backgroundColor:'green',justifyContent:'center',alignItems:'center'}}>
-									<Animated.Image style={{width:BaseComponent.W*180/375,height:BaseComponent.W*180/375,borderRadius:BaseComponent.W*90/375,transform:[{rotate:thiz.state.picRotateValue.interpolate({inputRange: [0, 1],outputRange: ['0deg', '360deg']})}]}} source={require('../../image/home/pic1.jpg')}/>
+									<Animated.Image style={{width:BaseComponent.W*180/375,height:BaseComponent.W*180/375,borderRadius:BaseComponent.W*90/375,transform:[{rotate:thiz.state.picRotateValue.interpolate({inputRange: [0, 1],outputRange: ['0deg', '360deg']})}]}} source={{uri:thiz.state.data?thiz.state.data.songinfo.pic_huge:"ads"}}/>
 								</View>
 							</View>
 						</View>
