@@ -21,7 +21,7 @@ export default class musicPlayer extends BaseComponent{
 			picRotateValue:new Animated.Value(0),
 			songid:'',//歌曲id
 			musicURL:'',//音乐地址
-			lrcURL:'',//歌词地址
+			lrc:'',//歌词
 			paused:false,//控制歌曲播放暂停
 			totalTime:"00:00:00",//播放总时长
 			currentTime:"00:00:00",//当前时间
@@ -31,6 +31,7 @@ export default class musicPlayer extends BaseComponent{
             rotatingOpacity:new Animated.Value(1),//旋转动画透明度
             lrcOpacity:new Animated.Value(0),//歌词透明度
             showLrc:false,//是否显示歌词,true显示
+            data:'',//歌曲信息
 		}
 		this.isPause = false;//是否暂停
 		this.mAnimate = Animated.timing(this.state.picRotateValue, {
@@ -47,10 +48,20 @@ export default class musicPlayer extends BaseComponent{
 		let thiz = this;
 		var info = thiz.params.info;
 		let url='http://tingapi.ting.baidu.com/v1/restserver/ting?method=baidu.ting.song.play&songid='+info.item.song_id;
-		console.log("----------url-------------------",url);
-		thiz.log("---------------info------------------",info);
+		let lrcURL='http://tingapi.ting.baidu.com/v1/restserver/ting?method=baidu.ting.song.lry&songid='+info.item.song_id;
+		
 		thiz.fetch(url,function(ret){
-			thiz.log("-----------url-----------",ret);
+			
+			if(ret){
+				thiz.setState({data:ret})
+				thiz.fetch(lrcURL,function(lrc){
+					// thiz.log("--------------lrc---------",lrc);
+					if(lrc){
+						
+						// thiz.setState({lrc:lrc})
+					}
+				})
+			}
 		})
 		//获取歌词
         // thiz.fetch('http://tingapi.ting.baidu.com/v1/restserver/ting?method=baidu.ting.song.lry&songid=877578',function(ret){
@@ -211,13 +222,15 @@ export default class musicPlayer extends BaseComponent{
 	}
 
 	//渲染歌词
-	loadLrc=()=>{
+	loadLrc=(lrc)=>{
 		let thiz = this;
-		return (
+		return lrc?(
 			<View style={{width:'100%',height:'100%',backgroundColor:'blue',flexDirection:'column',alignItems:'center'}}>
 				<Text>45454464</Text>
 				<Text>45454464</Text>
 				<Text>45454464</Text>
+			</View>):(<View style={{width:'100%',height:'100%',justifyContent:'center',alignItems:'center'}}>
+				<Text>未找到歌词</Text>
 			</View>)
 	}
 
@@ -237,9 +250,9 @@ export default class musicPlayer extends BaseComponent{
 					</TouchableOpacity>		
 
 					<View style={{width:BaseComponent.W*200/375,height:'100%',marginLeft:BaseComponent.W*10/375}}>
-						<Text style={{fontSize:BaseComponent.W*15/375,color:'white'}}>苦中作乐</Text>
+						<Text style={{fontSize:BaseComponent.W*15/375,color:'white',maxwidth:BaseComponent.W*200/375}} numberOfLines={1}>{thiz.state.data?thiz.state.data.songinfo.title:""}</Text>
 						<View style={{width:'100%',height:BaseComponent.W*20/375,flexDirection:'row',alignItems:'center'}}>
-							<Text style={{fontSize:BaseComponent.W*13/375,color:'white',maxwidth:BaseComponent.W*200/375}} numberOfLines={1}>石白其</Text>
+							<Text style={{fontSize:BaseComponent.W*13/375,color:'white',maxwidth:BaseComponent.W*200/375}} numberOfLines={1}>{thiz.state.data?thiz.state.data.songinfo.author:""}</Text>
 							<Image style={{width:BaseComponent.W*15/375,height:BaseComponent.W*15/375}} source={require('../../image/home/rightback.png')}/>
 						</View>
 					</View>
@@ -292,7 +305,7 @@ export default class musicPlayer extends BaseComponent{
 						<ScrollView 
 							showsVerticalScrollIndicator={false}
 							style={{flex:1}}>
-							{thiz.loadLrc()}
+							{thiz.loadLrc(thiz.state.lrc)}
 						</ScrollView>
 					</Animated.View>
 				</TouchableWithoutFeedback>		
@@ -313,7 +326,7 @@ export default class musicPlayer extends BaseComponent{
 				</View>
 
 				{/*音乐播放*/}
-				<Video source={{uri: "http://zhangmenshiting.qianqian.com/data2/music/3519cdb70c14a95076e8c006c7226963/599516462/599516462.mp3?xcode=03550f8926118a9c554bf4edd997f8d2"}}
+				<Video source={{uri:thiz.state.data==""?"":thiz.state.data.bitrate.file_link}}
                     ref='player' 
                     paused={thiz.state.paused}
                     onProgress={this.onProgress}
