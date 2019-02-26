@@ -19,6 +19,9 @@ export default class musicPlayer extends BaseComponent{
 		this.state={
 			rotateValue: new Animated.Value(340),
 			picRotateValue:new Animated.Value(0),
+			songid:'',//歌曲id
+			musicURL:'',//音乐地址
+			lrcURL:'',//歌词地址
 			paused:false,//控制歌曲播放暂停
 			totalTime:"00:00:00",//播放总时长
 			currentTime:"00:00:00",//当前时间
@@ -43,11 +46,16 @@ export default class musicPlayer extends BaseComponent{
 	componentDidMount(){
 		let thiz = this;
 		var info = thiz.params.info;
+		let url='http://tingapi.ting.baidu.com/v1/restserver/ting?method=baidu.ting.song.play&songid='+info.item.song_id;
+		console.log("----------url-------------------",url);
 		thiz.log("---------------info------------------",info);
+		thiz.fetch(url,function(ret){
+			thiz.log("-----------url-----------",ret);
+		})
 		//获取歌词
-        thiz.fetch('http://tingapi.ting.baidu.com/v1/restserver/ting?method=baidu.ting.song.lry&songid=877578',function(ret){
-        	thiz.log('---------------Lrc-------------------'.ret);
-        });
+        // thiz.fetch('http://tingapi.ting.baidu.com/v1/restserver/ting?method=baidu.ting.song.lry&songid=877578',function(ret){
+        // 	thiz.log('---------------Lrc-------------------'.ret);
+        // });
 	};
 
 	//唱针动画
@@ -281,7 +289,11 @@ export default class musicPlayer extends BaseComponent{
 					thiz.changeShowLrcOrPic();
 				}}>
 					<Animated.View style={{width:BaseComponent.W,height:BaseComponent.W*400/375,backgroundColor:'blue',opacity:thiz.state.lrcOpacity,display:thiz.state.showLrc?'flex':'none'}}>
-
+						<ScrollView 
+							showsVerticalScrollIndicator={false}
+							style={{flex:1}}>
+							{thiz.loadLrc()}
+						</ScrollView>
 					</Animated.View>
 				</TouchableWithoutFeedback>		
 				
