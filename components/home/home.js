@@ -15,23 +15,6 @@ let W=Dimensions.get('window').width;
 let H=Dimensions.get('window').height;
 let BannerData=[require('../../image/home/Banner1.jpg'),require('../../image/home/Banner2.jpg'),require('../../image/home/Banner3.jpg')
 			   ,require('../../image/home/Banner4.jpg'),require('../../image/home/Banner5.jpg')]
-let Songlist1=[{key:'推荐歌单',data:[{name:'aaa',img:require('../../image/home/pic4.jpg')},
-			 {name:'aaa1',img:require('../../image/home/pic5.jpg')},
-			 {name:'aaa2',img:require('../../image/home/pic6.jpg')},
-			 {name:'aaa3',img:require('../../image/home/pic7.jpg')},
-			 {name:'aaa4',img:require('../../image/home/pic8.jpg')}]},
-			 {key:'最新音乐',data:[{name:'bbb',img:require('../../image/home/pic1.jpg')},
-			 {name:'bbb1',img:require('../../image/home/pic2.jpeg')},
-			 {name:'bbb2',img:require('../../image/home/pic3.jpeg')},
-			 {name:'bbb3',img:require('../../image/home/pic8.jpg')},
-			 {name:'bbb4',img:require('../../image/home/pic6.jpg')}]},
-			 {key:'主播电台',data:[{name:'ccc',img:require('../../image/home/pic8.jpg')},
-			 {name:'ccc1',img:require('../../image/home/pic6.jpg')},
-			 {name:'ccc2',img:require('../../image/home/pic7.jpg')},
-			 {name:'ccc3',img:require('../../image/home/pic4.jpg')},
-			 {name:'ccc4',img:require('../../image/home/pic5.jpg')},
-			 {name:'ccc5',img:require('../../image/home/pic3.jpeg')},
-			 {name:'ccc6',img:require('../../image/home/pic1.jpg')}]}];
 export default class Home extends BaseComponent{
 
 	constructor(props){

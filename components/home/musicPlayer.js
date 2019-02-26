@@ -27,6 +27,7 @@ export default class musicPlayer extends BaseComponent{
             playAnimated:true,//判断旋转动画是否开始,true表示开始
             rotatingOpacity:new Animated.Value(1),//旋转动画透明度
             lrcOpacity:new Animated.Value(0),//歌词透明度
+            showLrc:false,//是否显示歌词,true显示
 		}
 		this.isPause = false;//是否暂停
 		this.mAnimate = Animated.timing(this.state.picRotateValue, {
@@ -35,7 +36,6 @@ export default class musicPlayer extends BaseComponent{
 			easing: Easing.inOut(Easing.linear),
 		});
 
-		this.showLrc=false;//是否显示歌词,true显示
 		this.isLoading=false;//是否正在执行歌词切换动画
 
 	}
@@ -44,6 +44,10 @@ export default class musicPlayer extends BaseComponent{
 		let thiz = this;
 		var info = thiz.params.info;
 		thiz.log("---------------info------------------",info);
+		//获取歌词
+        thiz.fetch('http://tingapi.ting.baidu.com/v1/restserver/ting?method=baidu.ting.song.lry&songid=877578',function(ret){
+        	thiz.log('---------------Lrc-------------------'.ret);
+        });
 	};
 
 	//唱针动画
@@ -63,8 +67,8 @@ export default class musicPlayer extends BaseComponent{
 		if(thiz.isLoading){
 			return ;
 		}
-		if(thiz.showLrc){
-			thiz.showLrc=false;
+		if(thiz.state.showLrc){
+			
 			thiz.state.lrcOpacity.setValue(1);
 			thiz.state.rotatingOpacity.setValue(0);
 			Animated.timing(thiz.state.lrcOpacity,{
@@ -74,6 +78,8 @@ export default class musicPlayer extends BaseComponent{
 				thiz.isLoading=true;
 			});
 
+			thiz.setState({showLrc:false});
+			
 			setTimeout(function(){
 				Animated.timing(thiz.state.rotatingOpacity,{
 				toValue:1,
@@ -83,7 +89,7 @@ export default class musicPlayer extends BaseComponent{
 			});
 			},2000)
 		}else{
-			thiz.showLrc=true;
+			
 			thiz.state.lrcOpacity.setValue(0);
 			thiz.state.rotatingOpacity.setValue(1);
 			Animated.timing(thiz.state.rotatingOpacity,{
@@ -92,7 +98,9 @@ export default class musicPlayer extends BaseComponent{
 			}).start(()=>{
 				thiz.isLoading=true
 			});
-
+			
+			thiz.setState({showLrc:true})
+			
 			setTimeout(function(){
 				Animated.timing(thiz.state.lrcOpacity,{
 				toValue:1,
@@ -144,11 +152,6 @@ export default class musicPlayer extends BaseComponent{
             }
             var totalTime=hour+":"+minute+":"+second;
 
-            //获取歌词
-            thiz.fetch('http://tingapi.ting.baidu.com/v1/restserver/ting?method=baidu.ting.song.lry&songid=877578',function(ret){
-            	thiz.log('---------------Lrc-------------------'.ret);
-            })
-
             this.setState({totalTime:totalTime,totalSecond:time});
 	}
 
@@ -199,7 +202,16 @@ export default class musicPlayer extends BaseComponent{
 		});
 	}
 
-
+	//渲染歌词
+	loadLrc=()=>{
+		let thiz = this;
+		return (
+			<View style={{width:'100%',height:'100%',backgroundColor:'blue',flexDirection:'column',alignItems:'center'}}>
+				<Text>45454464</Text>
+				<Text>45454464</Text>
+				<Text>45454464</Text>
+			</View>)
+	}
 
 	//渲染界面
 	render(){
@@ -236,7 +248,7 @@ export default class musicPlayer extends BaseComponent{
 				</View>
 				
 				{/*唱针和唱盘和下载，收藏区域*/}
-				<Animated.View style={{width:BaseComponent.W,height:BaseComponent.W*400/375,opacity:thiz.state.rotatingOpacity,display:thiz.showLrc?'none':'flex'}} onStartShouldSetResponder={()=>{return true;}} onResponderRelease={(event)=>{
+				<Animated.View style={{width:BaseComponent.W,height:BaseComponent.W*400/375,opacity:thiz.state.rotatingOpacity,display:thiz.state.showLrc?'none':'flex'}} onStartShouldSetResponder={()=>{return true;}} onResponderRelease={(event)=>{
 						console.log("----------------------------event--------------------------------",event.nativeEvent);
 				}}>
 					<View style={{width:BaseComponent.W,height:BaseComponent.W*80/375,flexDirection:'row',justifyContent:'center',alignItems:'center'}}>
@@ -268,7 +280,7 @@ export default class musicPlayer extends BaseComponent{
 				<TouchableWithoutFeedback onPress={()=>{
 					thiz.changeShowLrcOrPic();
 				}}>
-					<Animated.View style={{width:BaseComponent.W,height:BaseComponent.W*400/375,backgroundColor:'red',opacity:thiz.state.lrcOpacity,display:thiz.showLrc?'flex':'none'}}>
+					<Animated.View style={{width:BaseComponent.W,height:BaseComponent.W*400/375,backgroundColor:'blue',opacity:thiz.state.lrcOpacity,display:thiz.state.showLrc?'flex':'none'}}>
 
 					</Animated.View>
 				</TouchableWithoutFeedback>		
