@@ -57,8 +57,22 @@ export default class musicPlayer extends BaseComponent{
 				thiz.fetch(lrcURL,function(lrc){
 					// thiz.log("--------------lrc---------",lrc);
 					if(lrc){
-						
+
 						// thiz.setState({lrc:lrc})
+						if(lrc.lrcContent){
+							var newLrc=lrc.lrcContent;
+							var lrcArr=newLrc.split('\n');//把歌词切成数组
+							var newLRCArr=[];
+							for(var i=0;i<lrcArr.length;i++){
+								var obj={};
+								// thiz.log("--------------"+i+"--歌词-------------",lrcArr[i]);
+								var lrcTimeIndex=lrcArr[i].indexOf('[');
+								var lrcTimeEndIndex=lrcArr[i].indexOf(']');
+								// console.log("------------------"+i+"--开始下标为-------------",lrcTimeIndex);
+								// console.log("------------------"+i+"--结束下标为-------------",lrcTimeEndIndex);
+							}
+							
+						}
 					}
 				})
 			}
