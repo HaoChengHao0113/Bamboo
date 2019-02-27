@@ -57,7 +57,6 @@ export default class musicPlayer extends BaseComponent{
 				thiz.fetch(lrcURL,function(lrc){
 					// thiz.log("--------------lrc---------",lrc);
 					if(lrc){
-
 						// thiz.setState({lrc:lrc})
 						if(lrc.lrcContent){
 							var newLrc=lrc.lrcContent;
@@ -65,12 +64,16 @@ export default class musicPlayer extends BaseComponent{
 							var newLRCArr=[];
 							for(var i=0;i<lrcArr.length;i++){
 								var obj={};
-								// thiz.log("--------------"+i+"--歌词-------------",lrcArr[i]);
 								var lrcTimeIndex=lrcArr[i].indexOf('[');
 								var lrcTimeEndIndex=lrcArr[i].indexOf(']');
-								// console.log("------------------"+i+"--开始下标为-------------",lrcTimeIndex);
-								// console.log("------------------"+i+"--结束下标为-------------",lrcTimeEndIndex);
+								var lrcStart=lrcArr[i].substring(lrcTimeIndex+1,lrcTimeEndIndex);
+								var lrcShow=lrcArr[i].split(']')[1];//切出歌词
+								obj.lrcStart=lrcStart;
+								obj.lrcShow=lrcShow;
+								newLRCArr.push(obj);
 							}
+							// thiz.log("--------------newLRCArr----------------------",newLRCArr);
+							thiz.setState({lrc:newLRCArr});
 							
 						}
 					}
@@ -234,12 +237,18 @@ export default class musicPlayer extends BaseComponent{
 	//渲染歌词
 	loadLrc=(lrc)=>{
 		let thiz = this;
+		
 		return lrc?(
-			<View style={{width:'100%',height:'100%',backgroundColor:'blue',flexDirection:'column',alignItems:'center'}}>
-				<Text>45454464</Text>
-				<Text>45454464</Text>
-				<Text>45454464</Text>
-			</View>):(<View style={{width:'100%',height:'100%',justifyContent:'center',alignItems:'center'}}>
+			<View style={{width:BaseComponent.W,height:BaseComponent.W*400/375,backgroundColor:'blue',flexDirection:'column',alignItems:'center'}}>
+				{
+					lrc.map((item,index)=>{
+							thiz.log("-----------item-------------",item);
+						return (<View>
+								<Text>{item.lrcShow}</Text>
+							</View>)
+					})
+				}
+			</View>):(<View style={{width:BaseComponent.W,height:BaseComponent.W*400/375,justifyContent:'center',alignItems:'center'}}>
 				<Text>未找到歌词</Text>
 			</View>)
 	}
@@ -309,7 +318,7 @@ export default class musicPlayer extends BaseComponent{
 
 				{/*歌词显示*/}
 				<TouchableWithoutFeedback onPress={()=>{
-					thiz.changeShowLrcOrPic();
+					// thiz.changeShowLrcOrPic();
 				}}>
 					<Animated.View style={{width:BaseComponent.W,height:BaseComponent.W*400/375,backgroundColor:'blue',opacity:thiz.state.lrcOpacity,display:thiz.state.showLrc?'flex':'none'}}>
 						<ScrollView 
